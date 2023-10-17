@@ -3,8 +3,10 @@ package client.view;
 import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
-
+import java.awt.Cursor;
 import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -28,20 +30,45 @@ import javax.swing.JLabel;
  * JFileChooser：文件选择器，用于选择文件或目录
  */
 public class LoginFrame extends JFrame {
-    // 顶部logo
-    private JLabel logo_North;
-
-    // constructor
+    /*
+     * Version 1.0: 
+     *  绘制顶部背景图片＆底部登录栏
+     *  Date: 2023.10.17
+     *  Author: gjx          
+     */
+    /* 顶部背景 */
+    private JLabel background_North;
+    /* 底部登录栏 */
+    private JPanel loginPanel;
+    private JButton loginButton;
+    
     public LoginFrame() {
-        ImageIcon background_North = new ImageIcon();
-        background_North.setImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/background.png"))
+        /* ①顶部背景图片 */
+        ImageIcon background = new ImageIcon();
+        background.setImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/background.png"))
                 .getScaledInstance(516, 170, Image.SCALE_DEFAULT));
-        logo_North = new JLabel(background_North);
+        background_North = new JLabel(background);
+        /* ②登录栏 */
+        loginPanel = new JPanel(); // 存放登录栏组件
+        loginButton = new JButton(); // 存放登录按钮的图片
+        /* 登录按钮图片 */
+        ImageIcon loginIcon = new ImageIcon();
+        loginIcon.setImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/loginButton.png"))
+                .getScaledInstance(350, 45, Image.SCALE_DEFAULT));
+        loginButton.setIcon(loginIcon);
+        loginButton.setBorderPainted(false);
+        loginButton.setBorder(null);
+        loginButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); // 鼠标样式修改为手型，意为可以点击
+        loginPanel.add(loginButton);
+        /* ③Center */
+        
 
         /* 设计界面布局 */
-        add(logo_North, BorderLayout.NORTH);
+        add(background_North, BorderLayout.NORTH); // 顶部背景
+        add(loginPanel, BorderLayout.SOUTH); // 底部登录栏
         setVisible(true);
         setBounds(500, 150, 500, 460);
+        setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("FreeChat_登录");
     }
