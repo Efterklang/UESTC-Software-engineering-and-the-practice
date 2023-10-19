@@ -15,6 +15,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
+
+import client.server.clientService;
+
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -150,7 +153,13 @@ public class LoginFrame extends JFrame implements ActionListener {
                                 return;
                         }
                         clientService = new clientService();
-                        //TODO 
+                        if (clientService.checkUser(userId, pwd) == true) {
+                                this.dispose();
+                                JOptionPane.showConfirmDialog(null, "登录成功");
+                                //TODO new userFrame(userId,userClientService);
+                        } else {
+
+                        }
                 } else if (e.getSource() == registerButton) {
                         this.setVisible(false);
                         //TODO new RegisterFrame();

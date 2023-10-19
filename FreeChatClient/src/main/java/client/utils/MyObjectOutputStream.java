@@ -9,7 +9,7 @@ import java.io.OutputStream;
  * Ref:https://www.geeksforgeeks.org/how-to-fix-java-io-streamcorruptedexception-invalid-type-code-in-java/
  */
 public class MyObjectOutputStream extends ObjectOutputStream {
-    public MyObjectOutputStream(OutputStream out) throws Exception {
+    public MyObjectOutputStream(OutputStream out) throws IOException {
         super(out);
     }
 
