@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
-import client.server.clientService;
+import client.server.ClientService;
 
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
@@ -45,17 +45,16 @@ public class LoginFrame extends JFrame implements ActionListener {
         private JPanel loginPanel; // 存放登录栏组件
         private JButton loginButton; // 存放登录按钮的图片
         /* ③ Center */
-        private JTabbedPane choosePane; // 选项卡
         private JPanel centerPanel; // 中部Panel
         private JLabel avatar; // 中部logo
         // 中部输入Panel
         private JPanel inputPanel; // 输入栏
-        private JLabel userLabel, pwdLabel, emptyLabel; // 用户名、密码、empty
+        private JLabel userLabel, pwdLabel; // 用户名、密码
         private JTextField userText; // 用户名输入
         private JPasswordField pwdTxt; // 密码输入
         private JButton clearButton, registerButton; // 清空、注册
         // 业务逻辑(Login & Register)
-        private clientService clientService = null; // 用户登录注册类
+        private ClientService clientService = null; // 用户登录注册类
         public LoginFrame() {
                 /* ① 顶部背景图片 */
                 ImageIcon background = new ImageIcon();
@@ -66,12 +65,13 @@ public class LoginFrame extends JFrame implements ActionListener {
                 /* ② 登录栏 */
                 loginPanel = new JPanel(); // 存放登录栏组件
                 loginButton = new JButton(); // 存放登录按钮的图片
-                /* 登录按钮图片 */
-                ImageIcon loginIcon = new ImageIcon();
-                loginIcon.setImage(
-                                Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/loginButton.png"))
-                                                .getScaledInstance(350, 45, Image.SCALE_DEFAULT));
-                loginButton.setIcon(loginIcon);
+                /* 登录按钮 */
+                loginButton.setText("登录");
+                loginButton.setFont(new Font("youyuan", Font.BOLD, 20));
+                loginButton.setBackground(Color.decode("#33a3dc"));
+                loginButton.setPreferredSize(new Dimension(220, 40));
+                loginButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                loginButton.setBorderPainted(false);
                 loginButton.setBorderPainted(false);
                 loginButton.setBorder(null);
                 loginButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); // 鼠标样式修改为手型，意为可以点击
@@ -82,35 +82,35 @@ public class LoginFrame extends JFrame implements ActionListener {
                 avatarIcon.setImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/headshot.jpg"))
                                 .getScaledInstance(120, 144, Image.SCALE_DEFAULT));
                 avatar = new JLabel(avatarIcon);
-                emptyLabel = new JLabel("              ");
                 // 3.2.1 输入栏Panel
                 inputPanel = new JPanel();
                 centerPanel = new JPanel();
+                centerPanel = new JPanel();
                 centerPanel.add(avatar);
-                centerPanel.add(emptyLabel);
+                centerPanel.add(new JLabel("            "));
                 centerPanel.add(inputPanel);
                 inputPanel.setSize(200, 300);
-                choosePane = new JTabbedPane();
-                choosePane.add("用户登录", centerPanel);
 
                 // 3.2.2 输入栏组件
                 userLabel = new JLabel("用户名", JLabel.CENTER);
-                userLabel.setFont(new Font("youyuan", Font.BOLD, 16));
+                userLabel.setFont(new Font("youyuan", Font.BOLD, 20));
                 pwdLabel = new JLabel("密  码", JLabel.CENTER);
-                pwdLabel.setFont(new Font("youyuan", Font.BOLD, 16));
+                pwdLabel.setFont(new Font("youyuan", Font.BOLD, 20));
                 userText = new JTextField();
-                userText.setFont(new Font("youyuan", Font.PLAIN, 14));
+                userText.setFont(new Font("youyuan", Font.PLAIN, 20));
                 pwdTxt = new JPasswordField();
                 // 3.2.3 输入栏组件清空 和 注册账号按钮
                 clearButton = new JButton("清除密码");
-                clearButton.setFont(new Font("youyuan", Font.PLAIN, 13));
+                clearButton.setFont(new Font("youyuan", Font.PLAIN, 15));
                 clearButton.setForeground(Color.RED);
                 registerButton = new JButton("注册账号");
-                registerButton.setFont(new Font("youyuan", Font.PLAIN, 13));
+                registerButton.setFont(new Font("youyuan", Font.PLAIN, 15));
                 registerButton.setForeground(Color.BLUE);
                 registerButton.setPreferredSize(new Dimension(20, 20));
                 // 3.2.4 输入栏布局 3*3网格
-                inputPanel.setLayout(new GridLayout(3, 3));
+                inputPanel.setLayout(new GridLayout(4, 2));
+                inputPanel.add(new JLabel());
+                inputPanel.add(new JLabel());
                 inputPanel.add(userLabel);
                 inputPanel.add(userText);
                 inputPanel.add(pwdLabel);
@@ -124,7 +124,7 @@ public class LoginFrame extends JFrame implements ActionListener {
                 /* 设计界面布局 */
                 add(background_North, BorderLayout.NORTH); // 顶部背景
                 add(loginPanel, BorderLayout.SOUTH); // 底部登录栏
-                add(choosePane, BorderLayout.CENTER); // 中部登录栏
+                add(centerPanel, BorderLayout.CENTER);
                 setVisible(true);
                 setBounds(500, 150, 500, 460);
                 setResizable(false);
@@ -152,7 +152,8 @@ public class LoginFrame extends JFrame implements ActionListener {
                                 JOptionPane.showMessageDialog(null, "请输入密码");
                                 return;
                         }
-                        clientService = new clientService();
+                        clientService = new ClientService();
+                        // 成功登录,关闭loginin窗口，打开userFrame窗口
                         if (clientService.checkUser(userId, pwd) == true) {
                                 this.dispose();
                                 JOptionPane.showConfirmDialog(null, "登录成功");
@@ -162,7 +163,7 @@ public class LoginFrame extends JFrame implements ActionListener {
                         }
                 } else if (e.getSource() == registerButton) {
                         this.setVisible(false);
-                        //TODO new RegisterFrame();
+                        new RegisterFrame();
                 } else if (e.getSource() == clearButton) {
                         pwdTxt.setText("");
                 } 
