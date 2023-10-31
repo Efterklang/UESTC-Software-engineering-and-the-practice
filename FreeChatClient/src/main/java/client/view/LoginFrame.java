@@ -157,9 +157,9 @@ public class LoginFrame extends JFrame implements ActionListener {
                         if (clientService.checkUser(userId, pwd) == true) {
                                 this.dispose();
                                 JOptionPane.showConfirmDialog(null, "登录成功");
-                                //TODO new userFrame(userId,userClientService);
+                                new OnlineUsersListFrame(userId,clientService);
                         } else {
-
+                                JOptionPane.showMessageDialog(null, "账号或密码错误");
                         }
                 } else if (e.getSource() == registerButton) {
                         this.setVisible(false);
