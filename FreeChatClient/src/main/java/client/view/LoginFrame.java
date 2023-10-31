@@ -55,6 +55,10 @@ public class LoginFrame extends JFrame implements ActionListener {
         private JButton clearButton, registerButton; // 清空、注册
         // 业务逻辑(Login & Register)
         private ClientService clientService = null; // 用户登录注册类
+
+        /**
+         * @apiNote 生成登录框架
+         */
         public LoginFrame() {
                 /* ① 顶部背景图片 */
                 ImageIcon background = new ImageIcon();
@@ -157,7 +161,7 @@ public class LoginFrame extends JFrame implements ActionListener {
                         if (clientService.checkUser(userId, pwd) == true) {
                                 this.dispose();
                                 JOptionPane.showConfirmDialog(null, "登录成功");
-                                new OnlineUsersListFrame(userId,clientService);
+                                new OnlineFriendsListFrame(userId,clientService);
                         } else {
                                 JOptionPane.showMessageDialog(null, "账号或密码错误");
                         }
