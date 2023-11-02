@@ -99,10 +99,10 @@ public class ClientService {
         return status;
     }
 
-    /** 
+    /**
      * @param senderId 发出拉取列表请求的用户的id
      * @throws IOException
-    */
+     */
     public void onlineFriendList(String senderId) {
         Message message = new Message();
         message.setSendTime(new Date().toString());
@@ -110,7 +110,7 @@ public class ClientService {
         message.setMessType(MessageType.MESSAGE_GET_ONLINE_FRIEND);
 
         try {
-            ClientConnectThread thread = ClientConnectThraedManage.getThread(senderId, "在线");
+            ClientConnectThread thread = ClientConnectThreadManage.getThread(senderId, "在线");
             MyObjectOutputStream oos = new MyObjectOutputStream(thread.getSocket().getOutputStream());
             oos.writeObject(message);
         } catch (IOException e) {
@@ -120,6 +120,7 @@ public class ClientService {
 
     /**
      * 实现无异常退出
+     * 
      * @param userId
      * @param state
      */
@@ -128,17 +129,19 @@ public class ClientService {
         message.setSender(userId);
         message.setMessType(MessageType.MESSAGE_CLIENT_EXIT);
         message.setGetter(state);
-        //todo
+        // todo
     }
-    
-    /** 使用Thread封装ClientService.socket和OnlineFriendsListFrame 
+
+    /**
+     * 使用Thread封装ClientService.socket和OnlineFriendsListFrame
+     * 
      * @param userId
      * @param onlineUsersListFrame
-    */
+     */
     public void startThread(String userId, OnlineFriendsListFrame onlineUsersListFrame) {
         ClientConnectThread clientConnectThread = new ClientConnectThread(socket, onlineUsersListFrame);
         clientConnectThread.start();
-        ClientConnectThraedManage.addThread(userId, "在线", clientConnectThread);
+        ClientConnectThreadManage.addThread(userId, "在线", clientConnectThread);
     }
 
 }
