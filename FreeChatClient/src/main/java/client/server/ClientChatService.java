@@ -37,7 +37,7 @@ public class ClientChatService {
     public void sendDirectMessage(String senderId, String getterId, String content) {
         // 构造message对象并初始化
         Message message = new Message();
-        message.setMessType(MessageType.MESSAGE_COMMON_MES);
+        message.setMessType(MessageType.COMMON_MES);
         message.setSender(senderId);
         message.setGetter(getterId);
         message.setContent(content);
@@ -61,7 +61,7 @@ public class ClientChatService {
      */
     public void sendGroupMessage(String sendId, String content) {
         Message message = new Message();
-        message.setMessType(MessageType.MESSAGE_GROUP_MES);
+        message.setMessType(MessageType.GROUP_MES);
         message.setSender(sendId);
         message.setContent(content);
         message.setSendTime(new java.util.Date().toString());

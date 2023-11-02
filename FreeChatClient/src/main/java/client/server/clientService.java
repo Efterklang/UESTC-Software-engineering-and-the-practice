@@ -50,7 +50,7 @@ public class ClientService {
             // 接收服务端返回的Message
             MyObjectInputStream ois = new MyObjectInputStream(socket.getInputStream());
             Message message = (Message) ois.readObject();
-            if (message.getMessType().equals(MessageType.MESSAGE_LOGIN_SUCCEED)) {
+            if (message.getMessType().equals(MessageType.LOGIN_SUCCEED)) {
                 status = true;
             } else {
                 JOptionPane.showMessageDialog(null, "账号或密码错误");
@@ -78,13 +78,13 @@ public class ClientService {
         try {
             user.setUserId(userId);
             user.setPassword(password);
-            user.setRegistMessageType(MessageType.MESSAGE_REGIST_REQUEST);
+            user.setRegistMessageType(MessageType.REGIST_REQUEST);
             socket = new Socket(InetAddress.getLocalHost(), 9999);
             MyObjectOutputStream oos = new MyObjectOutputStream(socket.getOutputStream());
             oos.writeObject(user);
             MyObjectInputStream ois = new MyObjectInputStream(socket.getInputStream());
             Message message = (Message) ois.readObject();
-            if (message.getMessType().equals(MessageType.MESSAGE_REGIST_SUCCEED)) {
+            if (message.getMessType().equals(MessageType.REGIST_SUCCEED)) {
                 JOptionPane.showMessageDialog(null, "注册成功");
                 status = true;
             } else {
@@ -107,7 +107,7 @@ public class ClientService {
         Message message = new Message();
         message.setSendTime(new Date().toString());
         message.setSender(senderId);
-        message.setMessType(MessageType.MESSAGE_GET_ONLINE_FRIEND);
+        message.setMessType(MessageType.GET_ONLINE_FRIEND);
 
         try {
             ClientConnectThread thread = ClientConnectThreadManage.getThread(senderId, "在线");
@@ -127,7 +127,7 @@ public class ClientService {
     public void logout(String userId, String state) {
         Message message = new Message();
         message.setSender(userId);
-        message.setMessType(MessageType.MESSAGE_CLIENT_EXIT);
+        message.setMessType(MessageType.CLIENT_EXIT);
         message.setGetter(state);
         // todo
     }

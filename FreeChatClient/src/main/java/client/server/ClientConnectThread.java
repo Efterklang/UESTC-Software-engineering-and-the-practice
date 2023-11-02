@@ -30,7 +30,7 @@ public class ClientConnectThread extends Thread {
         while (true) {
             try (MyObjectInputStream ois = new MyObjectInputStream(socket.getInputStream());) {
                 Message message = (Message) ois.readObject();
-                if (message.getMessType().equals(MessageType.MESSAGE_RETURN_ONLINE_FRIEND)) {
+                if (message.getMessType().equals(MessageType.RETURN_ONLINE_FRIEND)) {
 
                 }
             } catch (Exception e) {
