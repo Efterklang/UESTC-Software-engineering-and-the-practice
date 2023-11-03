@@ -23,6 +23,12 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * @apiNote ✨注册界面层
+ * @author gjx
+ * @version 1.0
+ * @see client.server.UserClientService
+ */
 public class RegisterFrame extends JFrame implements ActionListener {
     private JLabel background_North;
     private JLabel userLabel, pwdLabel, pwdLabel2; // 用户名，密码，二次输入密码
@@ -131,6 +137,7 @@ public class RegisterFrame extends JFrame implements ActionListener {
             UserClientService clientService = new UserClientService();
             if (clientService.registerUser(userId, pwd)) {
                 JOptionPane.showMessageDialog(this, "注册成功");
+                this.setVisible(false);
                 new LoginFrame();
             } else {
                 JOptionPane.showMessageDialog(this,"注册失败,请重新注册");
