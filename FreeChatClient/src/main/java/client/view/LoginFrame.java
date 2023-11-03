@@ -23,20 +23,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-/*
- * Swing组件介绍
- * BackGroundInfo(JFrame组件):
- * JPanel：面板，可以在其中添加其他组件，用于组织和布局其他组件。
- * JLabel：标签，用于显示文本或图像。
- * JButton：按钮，用于触发事件。
- * JTextField：文本框，用于输入和显示文本。
- */
-
 /**
+ * @apiNote ✨登录界面层
  * @author gjx
- * @apiNote 登录窗口
+ * @version 1.0
+ * @see client.server.UserClientService
  */
-public class LoginFrame extends JFrame implements ActionListener {
+public class LoginFrame extends JFrame{
 	/* ① 顶部背景 */
 	private JLabel background_North; // 顶部背景图片
 	/* ② 登录栏 */
@@ -54,6 +47,13 @@ public class LoginFrame extends JFrame implements ActionListener {
 	// 业务逻辑(Login & Register)
 	private UserClientService userClientService = null; // 用户登录注册类
 
+	/**
+	 * @main 用于调试代码
+	 */
+	public static void main(String[] args) {
+		new LoginFrame();
+	}
+
 	public LoginFrame() {
 		/* ① 顶部背景图片 */
 		ImageIcon background = new ImageIcon();
@@ -62,8 +62,8 @@ public class LoginFrame extends JFrame implements ActionListener {
 						.getScaledInstance(516, 170, Image.SCALE_DEFAULT));
 		background_North = new JLabel(background);
 		/* ② 登录栏 */
-		loginPanel = new JPanel(); // 存放登录栏组件
-		loginButton = new JButton(); // 存放登录按钮的图片
+		loginPanel = new JPanel();
+		loginButton = new JButton();
 		/* 登录按钮 */
 		loginButton.setText("登录");
 		loginButton.setFont(new Font("youyuan", Font.BOLD, 20));
@@ -114,9 +114,43 @@ public class LoginFrame extends JFrame implements ActionListener {
 		inputPanel.add(clearButton);
 		inputPanel.add(registerButton);
 		/* 添加监听 */
-		loginButton.addActionListener(this);
-		clearButton.addActionListener(this);
-		registerButton.addActionListener(this);
+		loginButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String userId = userText.getText().trim();
+				String pwd = new String(pwdTxt.getPassword()).trim();
+				if ("".equals(userId) || userId == null) {
+					JOptionPane.showMessageDialog(null, "请输入账号");
+					return;
+				}
+				if ("".equals(pwd) || pwd == null) {
+					JOptionPane.showMessageDialog(null, "请输入密码");
+					return;
+				}
+				userClientService = new UserClientService();
+				// 成功登录,关闭loginin窗口，打开userFrame窗口
+				if (userClientService.checkUser(userId, pwd) == true) {
+					LoginFrame.this.dispose();
+					JOptionPane.showConfirmDialog(null, "登录成功");
+					new OnlineFriendsListFrame(userId, userClientService);
+				} else {
+					JOptionPane.showMessageDialog(null, "账号或密码错误");
+				}
+			}
+		});
+		registerButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				LoginFrame.this.setVisible(false);
+				new RegisterFrame();
+			}
+		});
+		clearButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				pwdTxt.setText("");
+			}
+		});
 		/* 设计界面布局 */
 		add(background_North, BorderLayout.NORTH); // 顶部背景
 		add(loginPanel, BorderLayout.SOUTH); // 底部登录栏
@@ -126,39 +160,5 @@ public class LoginFrame extends JFrame implements ActionListener {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("FreeChat_登录");
-	}
-
-	/**
-	 * @apiNote 监听事件
-	 * @param e 事件(登录、清空、注册)
-	 */
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == loginButton) {
-			String userId = userText.getText().trim();
-			String pwd = new String(pwdTxt.getPassword()).trim();
-			if ("".equals(userId) || userId == null) {
-				JOptionPane.showMessageDialog(null, "请输入账号");
-				return;
-			}
-			if ("".equals(pwd) || pwd == null) {
-				JOptionPane.showMessageDialog(null, "请输入密码");
-				return;
-			}
-			userClientService = new UserClientService();
-			// 成功登录,关闭loginin窗口，打开userFrame窗口
-			if (userClientService.checkUser(userId, pwd) == true) {
-				this.dispose();
-				JOptionPane.showConfirmDialog(null, "登录成功");
-				new OnlineFriendsListFrame(userId, userClientService);
-			} else {
-				JOptionPane.showMessageDialog(null, "账号或密码错误");
-			}
-		} else if (e.getSource() == registerButton) {
-			this.setVisible(false);
-			new RegisterFrame();
-		} else if (e.getSource() == clearButton) {
-			pwdTxt.setText("");
-		}
 	}
 }
