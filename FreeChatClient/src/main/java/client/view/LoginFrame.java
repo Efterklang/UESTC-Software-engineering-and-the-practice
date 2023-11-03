@@ -73,7 +73,6 @@ public class LoginFrame extends JFrame implements ActionListener {
 		loginButton.setBorderPainted(false);
 		loginButton.setBorderPainted(false);
 		loginButton.setBorder(null);
-		loginButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); // 鼠标样式修改为手型，意为可以点击
 		loginPanel.add(loginButton);
 		/* ③ Center */
 		// 3.1 Center-Left
