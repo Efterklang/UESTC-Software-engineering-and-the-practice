@@ -71,7 +71,6 @@ public class LoginFrame extends JFrame implements ActionListener {
 		loginButton.setPreferredSize(new Dimension(220, 40));
 		loginButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		loginButton.setBorderPainted(false);
-		loginButton.setBorderPainted(false);
 		loginButton.setBorder(null);
 		loginPanel.add(loginButton);
 		/* ③ Center */
