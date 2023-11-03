@@ -4,6 +4,7 @@ import client.view.ChatFrame;
 import common.Message;
 import common.MessageType;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import client.utils.MyObjectOutputStream;
 
@@ -13,7 +14,7 @@ import client.utils.MyObjectOutputStream;
  */
 public class ClientChatService {
     private ChatFrame chatFrame;
-
+    SimpleDateFormat sdf = new SimpleDateFormat("MM月dd日HH时mm分ss秒");
     public ClientChatService(ChatFrame chatFrame) {
         this.chatFrame = chatFrame;
     }
@@ -43,7 +44,7 @@ public class ClientChatService {
         message.setContent(content);
         message.setSendTime(new java.util.Date().toString());
         // 打印消息到聊天框
-        printToChatFrame(senderId + "(我):\t\t" + new Date().toString());
+        printToChatFrame(senderId + "(我)" + sdf.format(new Date()));
         printToChatFrame(content + "\n");
         // 获取线程
         ClientConnectServerThread thread = ClientConnectServerThreadManage.getThread(senderId, getterId);
@@ -66,7 +67,7 @@ public class ClientChatService {
         message.setContent(content);
         message.setSendTime(new java.util.Date().toString());
         
-        printToChatFrame(sendId + "(我):\t\t" + new Date().toString());
+        printToChatFrame(sendId + "(我)" + sdf.format(new Date()));
         printToChatFrame(content + "\n");
 
         ClientConnectServerThread thread = ClientConnectServerThreadManage.getThread(sendId, "群聊");

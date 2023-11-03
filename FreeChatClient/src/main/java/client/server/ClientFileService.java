@@ -8,6 +8,7 @@ import common.MessageType;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -18,7 +19,7 @@ import java.util.Date;
  */
 public class ClientFileService {
     private ChatFrame chatFrame = null;
-
+    SimpleDateFormat sdf = new SimpleDateFormat("MM月dd日HH时mm分ss秒");
     /**
      * @apiNote 将内容打印到聊天框
      * @param content 聊天内容
@@ -48,7 +49,7 @@ public class ClientFileService {
         message.setFileName(fileName);
         message.setSender(senderId);
         message.setGetter(getterId);
-        message.setSendTime(new Date().toString());
+        message.setSendTime(sdf.format(new Date()));
 
         try (FileInputStream fis = new FileInputStream(filePath)) {
             byte[] fileBytes = new byte[(int) new File(filePath).length()];
@@ -62,8 +63,8 @@ public class ClientFileService {
             ClientConnectServerThread thread = ClientConnectServerThreadManage.getThread(senderId, getterId);
             MyObjectOutputStream oos = new MyObjectOutputStream(thread.getSocket().getOutputStream());
             oos.writeObject(message);
-            printToChatFrame(senderId + "(我)  发送文件:\t\t   " + new Date().toString());
-            printToChatFrame("   路径为:  " + filePath + "\n");
+            printToChatFrame(senderId + "(我) 发送文件:" + sdf.format(new Date()));
+            printToChatFrame("路径为: " + filePath + "\n");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -84,7 +85,7 @@ public class ClientFileService {
         Message message = new Message();
         message.setMessType(MessageType.GROUP_FILE_MES);
         message.setSender(senderId);
-        message.setSendTime(new Date().toString());
+        message.setSendTime(sdf.format(new Date()));
         message.setFileName(fileName);
 
         try (FileInputStream fis = new FileInputStream(filePath)) {
@@ -94,8 +95,8 @@ public class ClientFileService {
             ClientConnectServerThread thread = ClientConnectServerThreadManage.getThread(senderId, "群聊");
             MyObjectOutputStream oos = new MyObjectOutputStream(thread.getSocket().getOutputStream());
             oos.writeObject(message);
-            printToChatFrame(senderId + "(我)  发送文件:\t\t   " + new Date().toString());
-            printToChatFrame("   路径为:  " + filePath + "\n");
+            printToChatFrame(senderId + "(我)  发送文件:  " + sdf.format(new Date()));
+            printToChatFrame("路径为:  " + filePath + "\n");
         } catch (Exception e) {
             e.printStackTrace();
         }
