@@ -15,7 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import client.server.ClientService;
+import client.server.UserClientService;
 
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
@@ -52,7 +52,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 	private JPasswordField pwdTxt; // 密码输入
 	private JButton clearButton, registerButton; // 清空、注册
 	// 业务逻辑(Login & Register)
-	private ClientService clientService = null; // 用户登录注册类
+	private UserClientService userClientService = null; // 用户登录注册类
 
 	public LoginFrame() {
 		/* ① 顶部背景图片 */
@@ -136,9 +136,6 @@ public class LoginFrame extends JFrame implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		/*
-		 * 如果账号/密码为空，则弹出提示框
-		 */
 		if (e.getSource() == loginButton) {
 			String userId = userText.getText().trim();
 			String pwd = new String(pwdTxt.getPassword()).trim();
@@ -150,12 +147,12 @@ public class LoginFrame extends JFrame implements ActionListener {
 				JOptionPane.showMessageDialog(null, "请输入密码");
 				return;
 			}
-			clientService = new ClientService();
+			userClientService = new UserClientService();
 			// 成功登录,关闭loginin窗口，打开userFrame窗口
-			if (clientService.checkUser(userId, pwd) == true) {
+			if (userClientService.checkUser(userId, pwd) == true) {
 				this.dispose();
 				JOptionPane.showConfirmDialog(null, "登录成功");
-				new OnlineFriendsListFrame(userId, clientService);
+				new OnlineFriendsListFrame(userId, userClientService);
 			} else {
 				JOptionPane.showMessageDialog(null, "账号或密码错误");
 			}
