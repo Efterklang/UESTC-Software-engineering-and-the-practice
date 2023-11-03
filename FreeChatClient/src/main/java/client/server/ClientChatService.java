@@ -46,7 +46,7 @@ public class ClientChatService {
         printToChatFrame(senderId + "(我):\t\t" + new Date().toString());
         printToChatFrame(content + "\n");
         // 获取线程
-        ClientConnectThread thread = ClientConnectThreadManage.getThread(senderId, getterId);
+        ClientConnectServerThread thread = ClientConnectServerThreadManage.getThread(senderId, getterId);
         try {
             MyObjectOutputStream oos = new MyObjectOutputStream(thread.getSocket().getOutputStream());
             oos.writeObject(message);
@@ -69,7 +69,7 @@ public class ClientChatService {
         printToChatFrame(sendId + "(我):\t\t" + new Date().toString());
         printToChatFrame(content + "\n");
 
-        ClientConnectThread thread = ClientConnectThreadManage.getThread(sendId, "群聊");
+        ClientConnectServerThread thread = ClientConnectServerThreadManage.getThread(sendId, "群聊");
         try {
             MyObjectOutputStream oos = new MyObjectOutputStream(thread.getSocket().getOutputStream());
             oos.writeObject(message);

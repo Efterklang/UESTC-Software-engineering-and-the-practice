@@ -10,7 +10,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
-import client.server.ClientService;
+import client.server.UserClientService;
 
 import java.awt.Cursor;
 import java.awt.Font;
@@ -128,7 +128,7 @@ public class RegisterFrame extends JFrame implements ActionListener {
                 pwd2Text.setText("");
                 return;
             }
-            ClientService clientService = new ClientService();
+            UserClientService clientService = new UserClientService();
             if (clientService.registerUser(userId, pwd)) {
                 JOptionPane.showMessageDialog(this, "注册成功");
                 new LoginFrame();

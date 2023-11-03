@@ -3,11 +3,13 @@ package client.view;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JProgressBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import client.server.ClientFileService;
+import client.server.UserClientService;
 import client.server.ClientChatService;
-
+import java.awt.Font;
 public class ChatFrame extends JFrame {
     // 文本
     private JTextArea chatTxt = new JTextArea(); // 聊天框内文本
@@ -22,8 +24,35 @@ public class ChatFrame extends JFrame {
     private ClientChatService clientChatService = null; // 聊天类
     private ClientFileService clientFileService = null; // 文件传输类
     //todo
+
     public ChatFrame(String userId, String getterId) {
-        
+        System.out.println(Thread.currentThread().getName());
+        this.clientFileService = new ClientFileService();
+        this.clientChatService = new ClientChatService(ChatFrame.this);
+        UserClientService clientService = new UserClientService();
+        clientService.startChatThread(userId, getterId, ChatFrame.this);
+
+        JScrollPane jScrollPane = new JScrollPane();// 滚动条
+        jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        jScrollPane.setViewportView(this.chatTxt);
+        jScrollPane.setBounds(1, 1, 660, 350);
+        this.add(jScrollPane);
+        this.chatTxt.setEditable(false);
+        chatTxt.setFont(new Font("youyuan", Font.BOLD, 16));
+        chatTxt.setText(
+                "\t\t\t**************************\n\t\t\t*    欢迎使用freechat     *\n\t\t\t**************************\n");
+        setBounds(500, 100, 675, 600);
+        setVisible(true);
+        setResizable(false);
+        if (getterId.equals("群聊")) {
+            setTitle("群聊");
+        } else {
+            setTitle(userId + "与" + getterId + "的聊天窗口");
+        }
+    }
+
+    public static void main(String[] args) {
+        new ChatFrame("gjx", "abc");
     }
 
     public JTextArea getChatTxt() {

@@ -6,16 +6,16 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import client.server.ClientService;
+import client.server.UserClientService;
 @SuppressWarnings("all")
 public class OnlineFriendsListFrame extends JFrame {
     private JButton getListButton, startChatButton;
     private JTextArea showcase;
     private JTextField inputText;
     private JLabel userLabel;
-    private ClientService clientService;
+    private UserClientService clientService;
 
-    public OnlineFriendsListFrame(String userId, ClientService clientService) {
+    public OnlineFriendsListFrame(String userId, UserClientService clientService) {
         this.clientService = clientService;
         
     }
