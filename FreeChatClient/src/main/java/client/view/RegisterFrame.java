@@ -94,13 +94,14 @@ public class RegisterFrame extends JFrame implements ActionListener {
         centerPanel.add(new JLabel());
 
         // 设置页面布局
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         add(background_North, BorderLayout.NORTH);
         add(registerPanel, BorderLayout.SOUTH);
         add(centerPanel, BorderLayout.CENTER);
         registerButton.addActionListener(this);
         setVisible(true);
         setResizable(false);
-        setBounds(500, 150, 500, 460);
+        setBounds(600, (int) (screenSize.getHeight() / 2) - 315, 500, 430);
         setTitle("FreeChat_注册");
     }
 
