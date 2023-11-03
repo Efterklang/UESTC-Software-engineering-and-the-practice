@@ -50,7 +50,7 @@ public class ChatFrame extends JFrame {
      * @main 用于调试代码
      */
     public static void main(String[] args) {
-        new ChatFrame("gjx", "abc");
+        new ChatFrame("gjx", "Nancy");
     }
 
     public ChatFrame(String userId, String getterId) {
