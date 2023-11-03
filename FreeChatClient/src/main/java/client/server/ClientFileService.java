@@ -13,6 +13,8 @@ import java.util.Date;
 /**
  * @apiNote 客户端文件传输类
  * @author gjx
+ * @sendDirectFile 私聊发送文件
+ * @sendGroupFile 群聊发送文件
  */
 public class ClientFileService {
     private ChatFrame chatFrame = null;
@@ -57,7 +59,7 @@ public class ClientFileService {
         }
         // 发送给服务端
         try {
-            ClientConnectThread thread = ClientConnectThreadManage.getThread(senderId, getterId);
+            ClientConnectServerThread thread = ClientConnectServerThreadManage.getThread(senderId, getterId);
             MyObjectOutputStream oos = new MyObjectOutputStream(thread.getSocket().getOutputStream());
             oos.writeObject(message);
             printToChatFrame(senderId + "(我)  发送文件:\t\t   " + new Date().toString());
@@ -89,7 +91,7 @@ public class ClientFileService {
             byte[] fileBytes = new byte[(int) new File(filePath).length()];
             fis.read(fileBytes);
             message.setFileBytes(fileBytes);
-            ClientConnectThread thread = ClientConnectThreadManage.getThread(senderId, "群聊");
+            ClientConnectServerThread thread = ClientConnectServerThreadManage.getThread(senderId, "群聊");
             MyObjectOutputStream oos = new MyObjectOutputStream(thread.getSocket().getOutputStream());
             oos.writeObject(message);
             printToChatFrame(senderId + "(我)  发送文件:\t\t   " + new Date().toString());
