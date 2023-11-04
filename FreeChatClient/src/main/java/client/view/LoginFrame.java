@@ -48,14 +48,14 @@ public class LoginFrame extends JFrame {
 		ImageIcon background = new ImageIcon();
 		background.setImage(
 				Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/background.png"))
-						.getScaledInstance(516, 170, Image.SCALE_DEFAULT));
+						.getScaledInstance(500, 170, Image.SCALE_SMOOTH));
 		background_North = new JLabel(background);
 		
 		/* CenterPanel: avatar,空Panel(界面留白),inputPanel */
 		// avatar
 		ImageIcon avatarIcon = new ImageIcon();
-		avatarIcon.setImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/headshot.jpg"))
-				.getScaledInstance(140, 140, Image.SCALE_DEFAULT));
+		avatarIcon.setImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/avatar.jpg"))
+				.getScaledInstance(140, 140, Image.SCALE_SMOOTH));
 		avatar = new JLabel(avatarIcon);
 		// inputPanel
 		inputPanel.setSize(400, 300);
@@ -70,14 +70,15 @@ public class LoginFrame extends JFrame {
 		userText.setFont(new Font("youyuan", Font.PLAIN, 20));
 		pwdTxt = new JPasswordField();
 
-		clearButton = new JButton("清除密码");
-		clearButton.setFont(new Font("youyuan", Font.PLAIN, 15));
-		clearButton.setForeground(Color.RED);
-		registerButton = new JButton("注册账号");
-		registerButton.setFont(new Font("youyuan", Font.PLAIN, 15));
-		registerButton.setForeground(Color.BLUE);
+		clearButton = new JButton("清空密码");
+		clearButton.setBorderPainted(false);
+		clearButton.setFont(new Font("youyuan", Font.BOLD, 15));
+		clearButton.setBackground(Color.decode("#f15b6c"));
+		registerButton = new JButton("注册");
+		registerButton.setBorderPainted(false);
+		registerButton.setFont(new Font("youyuan", Font.BOLD, 15));
+		registerButton.setBackground(Color.decode("#33a3dc"));
 		registerButton.setPreferredSize(new Dimension(20, 20));
-
 		inputPanel.add(userLabel);
 		inputPanel.add(userText);
 		inputPanel.add(new JLabel());
@@ -90,7 +91,12 @@ public class LoginFrame extends JFrame {
 		inputPanel.add(registerButton);
 		
 		centerPanel.add(avatar);
-		centerPanel.add(new JLabel("            "));
+		centerPanel.add(new JLabel("	") {
+			@Override
+			public Dimension getPreferredSize() {
+				return new Dimension(50, 100);
+			}
+		});
 		centerPanel.add(inputPanel);
 
 		/* 登录栏 */
