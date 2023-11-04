@@ -19,13 +19,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import client.server.UserClientService;
+import client.service.UserClientService;
 
 /**
  * @apiNote ✨列表界面层
  * @author gjx
  * @version 1.0
- * @see client.server.UserClientService
+ * @see client.service.UserClientService
  */
 @SuppressWarnings("unused")
 public class OnlineFriendsListFrame extends JFrame {
