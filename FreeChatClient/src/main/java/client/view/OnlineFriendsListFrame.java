@@ -45,7 +45,7 @@ public class OnlineFriendsListFrame extends JFrame {
 
     public OnlineFriendsListFrame(String userId, UserClientService userClientService) {
         this.userClientService = userClientService;
-        userClientService.startThread(userId, OnlineFriendsListFrame.this);
+        userClientService.startListThread(userId, OnlineFriendsListFrame.this);
 
         // NorthPanel:拉取用户列表Button and Label
         getFriendListButton.setText("启动！");
