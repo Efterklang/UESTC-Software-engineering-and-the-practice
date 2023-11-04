@@ -2,24 +2,25 @@ package common;
 
 import java.io.Serializable;
 
+/**
+ * @author gjx
+ * @apiNote 客户端和服务端通信时的消息对象
+ * @version 2.0(新增文件传输)
+ * @see common.MessageType
+ */
 public class Message implements Serializable {
     private static final long serialVersionUID = 1L;
-    /*
-     * Version 1.0
-     * 功能：表示 客户端和服务端 通信时的消息对象
-     * 包括5个字段：发送者、接收者、发送内容、发送时间、消息类型
-    */
-    private String sender;
+    private String sender; // 发送者
     private String getter; // 接收者 
 	private String content;// 发送内容 
 	private String sendTime;// 发送时间
     private String messType;// 消息类型,在MessageType接口中定义
-    /*
-     * Version 2.0
-     * 功能：增加用户状态字段
-     */
     private String state;
-    
+    private int fileLength;
+    private byte[] fileBytes;
+    private String fileName;
+    private String srcPath;
+    private String destPath;
     // getter and setter
     public static long getSerialversionuid() {
         return serialVersionUID;
@@ -57,7 +58,39 @@ public class Message implements Serializable {
     public String getState() {
         return state;
     }
+
     public void setState(String state) {
         this.state = state;
     }
+    public int getFileLength() {
+        return fileLength;
+    }
+    public void setFileLength(int fileLength) {
+        this.fileLength = fileLength;
+    }
+    public byte[] getFileBytes() {
+        return fileBytes;
+    }
+    public void setFileBytes(byte[] fileBytes) {
+        this.fileBytes = fileBytes;
+    }
+    public String getFileName() {
+        return fileName;
+    }
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+    public String getSrcPath() {
+        return srcPath;
+    }
+    public void setSrcPath(String srcPath) {
+        this.srcPath = srcPath;
+    }
+    public String getDestPath() {
+        return destPath;
+    }
+    public void setDestPath(String destPath) {
+        this.destPath = destPath;
+    }
+    
 }

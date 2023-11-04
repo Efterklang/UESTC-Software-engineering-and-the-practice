@@ -6,6 +6,7 @@ import java.io.Serializable;
  * @author gjx
  * @apiNote 客户端和服务端通信时的消息对象
  * @version 2.0(新增文件传输)
+ * @see common.MessageType
  */
 public class Message implements Serializable {
     private static final long serialVersionUID = 1L;
