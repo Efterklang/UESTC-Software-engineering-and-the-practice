@@ -15,7 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import client.server.UserClientService;
+import client.service.UserClientService;
 
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
@@ -27,7 +27,7 @@ import javax.swing.JOptionPane;
  * @apiNote ✨登录界面层
  * @author gjx
  * @version 1.0
- * @see client.server.UserClientService
+ * @see client.service.UserClientService
  */
 public class LoginFrame extends JFrame {
 	private JLabel background_North; // 顶部背景图片
