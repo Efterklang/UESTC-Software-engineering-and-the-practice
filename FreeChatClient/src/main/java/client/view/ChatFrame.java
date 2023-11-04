@@ -1,8 +1,5 @@
 package client.view;
 
-import client.server.UserClientService;
-import client.server.ClientFileService;
-import client.server.ClientChatService;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -11,6 +8,11 @@ import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
+import client.service.ClientChatService;
+import client.service.ClientFileService;
+import client.service.UserClientService;
+
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -26,9 +28,9 @@ import javax.swing.BorderFactory;
  * @apiNote ✨聊天界面层，通过调用Service.clientChat/FileService完成功能
  * @author gjx
  * @version 1.0
- * @see client.server.ClientChatService
- * @see client.server.ClientFileService
- * @see client.server.UserClientService
+ * @see client.service.ClientChatService
+ * @see client.service.ClientFileService
+ * @see client.service.UserClientService
  */
 public class ChatFrame extends JFrame {
     // 文本
