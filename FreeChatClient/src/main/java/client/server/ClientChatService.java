@@ -11,6 +11,10 @@ import client.utils.MyObjectOutputStream;
 /**
  * @author gjx
  * @apiNote 客户端聊天服务，实现用户私聊，群聊功能
+ * <ul>
+ * <li>sendDirectMessage 私聊方法
+ * <li>sendGroupMessage 群聊方法
+ * </ul>
  */
 public class ClientChatService {
     private ChatFrame chatFrame;
