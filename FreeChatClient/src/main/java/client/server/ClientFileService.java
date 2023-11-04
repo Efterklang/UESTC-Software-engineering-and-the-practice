@@ -20,6 +20,7 @@ import java.util.Date;
 public class ClientFileService {
     private ChatFrame chatFrame = null;
     SimpleDateFormat sdf = new SimpleDateFormat("MM月dd日HH时mm分ss秒");
+    
     /**
      * @apiNote 将内容打印到聊天框
      * @param content 聊天内容
@@ -45,7 +46,7 @@ public class ClientFileService {
             return;
         }
         Message message = new Message();
-        message.setMessType(MessageType.MESSAGE_FILE_MES);
+        message.setMessType(MessageType.DIRECT_FILE_MES);
         message.setFileName(fileName);
         message.setSender(senderId);
         message.setGetter(getterId);
