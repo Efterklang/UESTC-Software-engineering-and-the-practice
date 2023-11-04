@@ -10,7 +10,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
-import client.server.UserClientService;
+import client.service.UserClientService;
 
 import java.awt.Cursor;
 import java.awt.Font;
@@ -27,7 +27,7 @@ import java.awt.event.ActionListener;
  * @apiNote ✨注册界面层
  * @author gjx
  * @version 1.0
- * @see client.server.UserClientService
+ * @see client.service.UserClientService
  */
 public class RegisterFrame extends JFrame implements ActionListener {
     private JLabel background_North;
