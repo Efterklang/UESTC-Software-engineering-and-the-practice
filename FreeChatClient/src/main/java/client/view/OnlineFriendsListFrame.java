@@ -62,8 +62,8 @@ public class OnlineFriendsListFrame extends JFrame {
         final JScrollPane scrollPane = new JScrollPane();
         welcomeMsg = new JTextField();
         welcomeMsg.setFont(new Font("Vladimir Script", Font.BOLD, 20));
-        welcomeMsg.setText("  Hello!  Enjoy your chatting ^_^");
-        welcomeMsg.setForeground(Color.RED);
+        welcomeMsg.setText("        Hello!  Enjoy your chatting");
+        welcomeMsg.setForeground(Color.decode("#2a5caa"));
         welcomeMsg.setBorder(BorderFactory.createLineBorder(Color.decode("#33a3dc"), 3));
         showcase = new JTextArea();
         showcase.setFont(fontYouYuan);
