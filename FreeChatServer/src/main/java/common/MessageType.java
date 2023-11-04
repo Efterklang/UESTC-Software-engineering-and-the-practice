@@ -9,7 +9,7 @@ package common;
  * @RETURN_ONLINE_FRIEND 服务端 返回在线用户列表
  * @CLIENT_EXIT 客户端请求退出
  * @GROUP_MES 客户端群发消息
- * @FILE_MES 客户端 发送文件
+ * @DIRECT_FILE_MES 客户端 发送文件
  * @REGIST_REQUEST 客户端 请求注册账户
  * @REGIST_SUCCEED 注册成功
  * @REGIST_FAIL 注册失败
