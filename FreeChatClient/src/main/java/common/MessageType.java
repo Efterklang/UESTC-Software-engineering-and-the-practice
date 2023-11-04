@@ -23,7 +23,7 @@ public interface MessageType {
     String RETURN_ONLINE_FRIEND = "5"; // 服务端 返回在线用户列表
     String CLIENT_EXIT = "6"; // 客户端请求退出
     String GROUP_MES = "7"; // 客户端群发消息
-    String MESSAGE_FILE_MES = "8"; // 客户端 发送文件
+    String DIRECT_FILE_MES = "8"; // 客户端 发送文件
     String REGIST_REQUEST = "9"; // 客户端 请求注册账户
     String REGIST_SUCCEED = "10"; // 注册成功
     String REGIST_FAIL = "11"; // 注册失败
