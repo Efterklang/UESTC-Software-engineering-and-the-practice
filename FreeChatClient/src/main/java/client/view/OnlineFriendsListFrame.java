@@ -29,6 +29,7 @@ import client.service.UserClientService;
  */
 @SuppressWarnings("unused")
 public class OnlineFriendsListFrame extends JFrame {
+    private static final long serialVersionUID = 1L;
     private JButton getFriendListButton = new JButton();
     private JButton startChatButton = new JButton();
     private JLabel friendListLabel = new JLabel();

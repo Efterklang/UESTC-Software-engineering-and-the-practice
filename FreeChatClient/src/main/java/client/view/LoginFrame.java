@@ -30,6 +30,7 @@ import javax.swing.JOptionPane;
  * @see client.service.UserClientService
  */
 public class LoginFrame extends JFrame {
+	private static final long serialVersionUID = 1L;
 	private JLabel background_North; // 顶部背景图片
 	private JPanel loginPanel; // 存放登录栏组件
 	private JButton loginButton; // 存放登录按钮的图片

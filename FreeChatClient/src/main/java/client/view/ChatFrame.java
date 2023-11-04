@@ -33,6 +33,7 @@ import javax.swing.BorderFactory;
  * @see client.service.UserClientService
  */
 public class ChatFrame extends JFrame {
+    private static final long serialVersionUID = 1L;
     // 文本
     private JTextArea chatTxt = new JTextArea(); // 聊天框内文本
     private JTextArea inputTxt = new JTextArea(); // 聊天输入文本

@@ -30,6 +30,7 @@ import java.awt.event.ActionListener;
  * @see client.service.UserClientService
  */
 public class RegisterFrame extends JFrame implements ActionListener {
+    private static final long serialVersionUID = 1L;
     private JLabel background_North;
     private JLabel userLabel, pwdLabel, pwdLabel2; // 用户名，密码，二次输入密码
     private JButton registerButton; // 注册按钮
