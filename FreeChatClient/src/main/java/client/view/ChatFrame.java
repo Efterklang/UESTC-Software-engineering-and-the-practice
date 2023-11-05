@@ -21,6 +21,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.io.File;
+import java.io.Serial;
 
 import javax.swing.BorderFactory;
 
@@ -48,13 +49,6 @@ public class ChatFrame extends JFrame {
     private ClientFileService clientFileService = null; // 文件传输类
     private static final int FRAME_WIDTH = 660;
     private static final int FRAME_HEIGHT = 350;
-
-    /**
-     * @main 用于调试代码
-     */
-    public static void main(String[] args) {
-        new ChatFrame("gjx", "Nancy");
-    }
 
     public ChatFrame(String userId, String getterId) {
         this.clientFileService = new ClientFileService();

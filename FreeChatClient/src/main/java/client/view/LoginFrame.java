@@ -31,7 +31,6 @@ import javax.swing.JOptionPane;
  */
 public class LoginFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
-	private JLabel background_North; // 顶部背景图片
 	private JPanel loginPanel; // 存放登录栏组件
 	private JButton loginButton; // 存放登录按钮的图片
 	private JPanel centerPanel = new JPanel(); // 中部Panel
@@ -50,7 +49,8 @@ public class LoginFrame extends JFrame {
 		background.setImage(
 				Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/background.png"))
 						.getScaledInstance(500, 170, Image.SCALE_SMOOTH));
-		background_North = new JLabel(background);
+		// 顶部背景图片
+		JLabel background_North = new JLabel(background);
 		
 		/* CenterPanel: avatar,空Panel(界面留白),inputPanel */
 		// avatar
@@ -130,17 +130,17 @@ public class LoginFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String userId = userText.getText().trim();
 				String pwd = new String(pwdTxt.getPassword()).trim();
-				if ("".equals(userId) || userId == null) {
+				if ("".equals(userId)) {
 					JOptionPane.showMessageDialog(null, "请输入账号");
 					return;
 				}
-				if ("".equals(pwd) || pwd == null) {
+				if ("".equals(pwd)) {
 					JOptionPane.showMessageDialog(null, "请输入密码");
 					return;
 				}
 				userClientService = new UserClientService();
 				// 成功登录,关闭loginin窗口，打开userFrame窗口
-				if (userClientService.checkUser(userId, pwd) == true) {
+				if (userClientService.checkUser(userId, pwd)) {
 					LoginFrame.this.dispose();
 					JOptionPane.showConfirmDialog(null, "登录成功");
 					new OnlineFriendsListFrame(userId, userClientService);
