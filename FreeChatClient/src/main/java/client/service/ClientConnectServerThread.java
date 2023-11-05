@@ -21,7 +21,8 @@ import common.MessageType;
  * <li>在线用户列表 
  * <li>私聊内容 
  * <li>群聊内容 
- * <li>文件
+ * <li>私发文件
+ * <li>群发文件
  * <li>退出,关闭socket<
  * </ul>
  */
@@ -61,6 +62,7 @@ public class ClientConnectServerThread extends Thread {
                         break;
                     // 接收文件消息
                     case MessageType.DIRECT_FILE_MES:
+                    case MessageType.GROUP_FILE_MES:
                         printToChatFrame(message.getSender() + "\t\t\t" + message.getSendTime());
                         printToChatFrame(message.getFileName() + "\n");
                         String filePath = saveFileAddress(message.getGetter(), message.getSender(),
