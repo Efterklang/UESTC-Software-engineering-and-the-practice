@@ -47,7 +47,7 @@ public class ServerConnectThreadManage {
      * @apiNote 根据id返回线程
      * @param userId 用户id
      * @param state  对方id
-     * @return
+     * @return ServerConnectThread
      */
     public static ServerConnectThread getThread(String userId, String state) {
         return map.get(userId).get(state);
@@ -76,11 +76,11 @@ public class ServerConnectThreadManage {
      */
     public static String getOnlineUsers() {
         Iterator<String> iterator = map.keySet().iterator();
-        String onlineUserList = "  ";
+        StringBuilder onlineUserList = new StringBuilder("  ");
         while (iterator.hasNext()) {
             // 取出在线用户的id 即为iterator 用" "分割
-            onlineUserList += iterator.next().toString() + "\n  ";
+            onlineUserList.append(iterator.next()).append("\n  ");
         }
-        return onlineUserList;
+        return onlineUserList.toString();
     }
 }

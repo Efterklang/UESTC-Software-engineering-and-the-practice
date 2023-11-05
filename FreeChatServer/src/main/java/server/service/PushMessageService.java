@@ -19,7 +19,7 @@ import server.view.ServerFrame;
  */
 public class PushMessageService {
     private ServerFrame serverFrame = null;
-    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+    private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
 
     public PushMessageService(ServerFrame serverFrame) {
         this.serverFrame = serverFrame;
@@ -38,9 +38,7 @@ public class PushMessageService {
          * 循环所有通信线程 得到socket,推送消息
          */
         HashMap<String, HashMap<String, ServerConnectThread>> map = ServerConnectThreadManage.getMap();
-        Iterator<String> iterator = map.keySet().iterator();
-        while (iterator.hasNext()) {
-            String onlineUserId = iterator.next().toString();
+        for (String onlineUserId : map.keySet()) {
             try {
                 ServerConnectThread thread = map.get(onlineUserId).get("群聊");
                 if (thread != null) {
@@ -59,7 +57,7 @@ public class PushMessageService {
 
     /**
      * @apiNote 将消息打印到服务器界面
-     * @param msg
+     * @param msg 消息
      */
     public void printToServerFrame(String msg) {
         if (msg != null) {
