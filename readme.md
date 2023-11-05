@@ -1,6 +1,6 @@
-## Free~~Fuck~~Chat项目
+## FreeChat项目
 
-### `<font color = "426ab3">`Intro`</font>`
+### `<font color = "426ab3">`Intro `</font>`
 
 > **FreeChat Project**
 > 当不安汹涌而来，对世界与生命的思索，对未来与知识的探讨，变得稀缺而困难起来。但即使身处浮躁的浪潮，我们也禁不住畅想，同处一个时代下的异国的同辈，他们此时在想些什么？他们又如何看待这个世界和彼此年轻的生活呢？如果你也和我们一样，欢迎来到这场，举世共舞的冒险。
@@ -47,7 +47,6 @@
       //todo
   }
   ```
-
 * 成员变量命名 小驼峰
 
   ```java
@@ -61,3 +60,5 @@
    */
   public void sendDirectFile(String senderId, String getterId, String filePath, String fileName,ChatFrame chatFrame)
   ```
+
+**ClientConnectServerThread对群发文件缺少处理.**
