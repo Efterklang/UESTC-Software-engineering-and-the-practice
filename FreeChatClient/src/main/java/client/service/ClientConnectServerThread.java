@@ -50,19 +50,17 @@ public class ClientConnectServerThread extends Thread {
                 Message message = (Message) ois.readObject();
                 switch (message.getMessType()) {
                     // 返回在线用户列表(message.getContent())
-                    case MessageType.RETURN_ONLINE_FRIEND:
-                        printToListFrame(message.getSendTime() + "\n======= 在线用户 ======\n"
-                                + "群聊\n" + message.getContent());
-                        break;
+                    case MessageType.RETURN_ONLINE_FRIEND ->
+                            printToListFrame(message.getSendTime() + "\n======= 在线用户 ======\n"
+                                    + "群聊\n" + message.getContent());
+
                     // 接收普通私聊消息和群聊消息
-                    case MessageType.COMMON_MES:
-                    case MessageType.GROUP_MES:
+                    case MessageType.COMMON_MES, MessageType.GROUP_MES -> {
                         printToChatFrame(message.getSender() + "\t\t\t" + message.getSendTime());
                         printToChatFrame(message.getContent() + "\n");
-                        break;
+                    }
                     // 接收文件消息
-                    case MessageType.DIRECT_FILE_MES:
-                    case MessageType.GROUP_FILE_MES:
+                    case MessageType.DIRECT_FILE_MES, MessageType.GROUP_FILE_MES -> {
                         printToChatFrame(message.getSender() + "\t\t\t" + message.getSendTime());
                         printToChatFrame(message.getFileName() + "\n");
                         String filePath = saveFileAddress(message.getGetter(), message.getSender(),
@@ -77,12 +75,10 @@ public class ClientConnectServerThread extends Thread {
                             JOptionPane.showMessageDialog(null, "保存成功", "Success",
                                     JOptionPane.INFORMATION_MESSAGE);
                         }
-                        break;
-                    case MessageType.CLIENT_EXIT:
-                        socket.close();
-                        break;
-                    default:
-                        break;
+                    }
+                    case MessageType.CLIENT_EXIT -> socket.close();
+                    default -> {
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -98,16 +94,15 @@ public class ClientConnectServerThread extends Thread {
      * @return filePath 保存到本地的绝对路径
      */
     public String saveFileAddress(String userId, String sender, String fileName) {
-        String filePath = JOptionPane.showInputDialog(null,
+        return JOptionPane.showInputDialog(null,
                 sender + "发送了" + fileName + "\n 请输入您想保存的路径(绝对路径):\n,",
                 "文件接收",
                 JOptionPane.INFORMATION_MESSAGE);
-        return filePath;
     }
 
     /**
      * @apiNote 打印消息到聊天窗口的chatTxt
-     * @param content
+     * @param content 消息内容
      */
     public void printToChatFrame(String content) {
         if (content != null) {
@@ -118,12 +113,11 @@ public class ClientConnectServerThread extends Thread {
 
     /**
      * @apiNote 打印在线用户到在线用户窗口showcase
-     * @param friends
+     * @param friends 在线用户列表
      */
     public void printToListFrame(String friends) {
         if (friends != null) {
             onlineFriendsListFrame.getShowcase().setText(friends + "\n");
-            System.out.println(friends + "\n");
         }
     }
 
@@ -132,11 +126,4 @@ public class ClientConnectServerThread extends Thread {
         return socket;
     }
 
-    public ChatFrame getChatFrame() {
-        return chatFrame;
-    }
-
-    public void setChatFrame(ChatFrame chatFrame) {
-        this.chatFrame = chatFrame;
-    }
 }

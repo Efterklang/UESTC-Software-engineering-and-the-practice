@@ -12,10 +12,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * @apiNote 客户端文件传输类
  * @author gjx
- * @sendDirectFile 私聊发送文件
- * @sendGroupFile 群聊发送文件
+ * @apiNote 客户端文件传输类
+ * <ul>
+ * <li>sendGroupFile 群聊发送文件
+ * <li>sendDirectFile 私聊发送文件
+ * </ul>
  */
 public class ClientFileService {
     private ChatFrame chatFrame = null;

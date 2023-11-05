@@ -33,7 +33,7 @@ public class UserClientService {
     private Socket socket;
 
     /**
-     * @apram userId 用户名
+     * @param userId 用户名
      * @param password 密码
      * @return 是否登录成功,true表示成功，false表示失败
      * @throws UnknownHostException
@@ -59,8 +59,6 @@ public class UserClientService {
                 JOptionPane.showMessageDialog(null, "账号或密码错误");
                 socket.close();
             }
-        } catch (UnknownHostException e) {
-            JOptionPane.showMessageDialog(null, "服务器未启动");
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "服务器未启动");
         } catch (ClassNotFoundException e) {
@@ -70,7 +68,7 @@ public class UserClientService {
     }
 
     /**
-     * @apram userId 用户名
+     * @param userId 用户名
      * @param password 密码
      * @return 是否注册成功,true表示成功，false表示失败
      * @throws IOException
@@ -97,9 +95,7 @@ public class UserClientService {
                 JOptionPane.showMessageDialog(null, "注册失败");
                 socket.close();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return status;
@@ -175,7 +171,7 @@ public class UserClientService {
      * @param onlineUsersListFrame
      */
     public void startListThread(String userId, OnlineFriendsListFrame onlineUsersListFrame) {
-        // 启动线程，用clinetConectServerThread封装维护socket
+        // 启动线程，用clientConnectServerThread封装维护socket
         // 将Thread放入线程管理类ClientConnectServerThreadManage
         ClientConnectServerThread clientConnectServerThread = new ClientConnectServerThread(socket,
                 onlineUsersListFrame);
