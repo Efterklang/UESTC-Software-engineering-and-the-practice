@@ -52,7 +52,6 @@ public class ServerConnectThread extends Thread {
                 String type = message.getMessType();
                 switch (type) {
                     case MessageType.GET_ONLINE_FRIEND -> {
-
                         String onlineUsers = ServerConnectThreadManage.getOnlineUsers();
                         Message responseToClient = new Message();
                         responseToClient.setMessType(MessageType.RETURN_ONLINE_FRIEND);
@@ -157,7 +156,7 @@ public class ServerConnectThread extends Thread {
                     default -> printToServerFrame("[ERROR] Unknown message type.");
                 }
             } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
+                System.out.println("ServerConnectThread.java: " + e.getMessage());
             }
         }
     }

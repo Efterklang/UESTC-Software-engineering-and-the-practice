@@ -76,10 +76,10 @@ public class ServerConnectThreadManage {
      */
     public static String getOnlineUsers() {
         Iterator<String> iterator = map.keySet().iterator();
-        StringBuilder onlineUserList = new StringBuilder("  ");
+        StringBuilder onlineUserList = new StringBuilder();
         while (iterator.hasNext()) {
             // 取出在线用户的id 即为iterator 用" "分割
-            onlineUserList.append(iterator.next()).append("\n  ");
+            onlineUserList.append(iterator.next()).append("\n");
         }
         return onlineUserList.toString();
     }
