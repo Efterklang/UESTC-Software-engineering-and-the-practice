@@ -96,7 +96,7 @@ public class OnlineFriendsListFrame extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
         this.setResizable(false);
-        this.setTitle("在线用户列表");
+        this.setTitle(userId + "的列表");
 
         /* 获取在线用户列表按钮监听 */
         getFriendListButton.addActionListener(new ActionListener() {

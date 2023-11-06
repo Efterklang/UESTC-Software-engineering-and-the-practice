@@ -21,8 +21,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.io.File;
-import java.io.Serial;
-
 import javax.swing.BorderFactory;
 
 /**
