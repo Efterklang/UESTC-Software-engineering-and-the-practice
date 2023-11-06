@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import common.User;
 
 /**
- * @apiNote 使用IO流+ConcurrentHashMap模拟数据库，后期可用JDBC+MySQL代替;
+ * @apiNote 🛠️使用IO流+ConcurrentHashMap模拟数据库，后期可用JDBC+MySQL代替;
  * <ul>
  * <li> readAccountFile: 读取数据库(account.properties)中的账号数据，写入到validUsers中;
  *      当程序启动时，需要调用该方法(放在static {}中)，将数据库中的数据读取到validUsers中;
@@ -20,7 +20,6 @@ import common.User;
  * </ul>
  * @author gjx
  * @see common.User
- * @throws IOException
  */
 public class ProcessAccountData {
     ClassLoader classLoader = ProcessAccountData.class.getClassLoader();

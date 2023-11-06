@@ -10,19 +10,7 @@ public class MyObjectInputStream extends ObjectInputStream {
         super(in);
     }
 
-    /**
-     * The readStreamHeader method is provided to allow subclasses to read and
-     * verify their own stream headers. It reads and verifies the magic number
-     * and version number.
-     *
-     * @throws IOException              if there are I/O errors while reading from
-     *                                  the
-     *                                  underlying {@code InputStream}
-     * @throws StreamCorruptedException if control information in the stream
-     *                                  is inconsistent
-     */
     @Override
     protected void readStreamHeader() throws IOException, StreamCorruptedException {
-        super.readStreamHeader();
     }
 }
