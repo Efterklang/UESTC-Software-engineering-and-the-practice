@@ -23,9 +23,11 @@ import server.service.PushMessageService;
 import javax.swing.JTextArea;
 
 /**
+ * @apiNote ✨服务端界面层
  * @author gjx
- * @apiNote 服务端界面
  * @version 1.0
+ * @see server.service.BasicService
+ * @see server.service.PushMessageService
  */
 @SuppressWarnings("unused")
 public class ServerFrame extends JFrame {
