@@ -3,6 +3,7 @@ package client.service;
 import java.net.Socket;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
@@ -21,7 +22,7 @@ import common.User;
  * <ul>
  * <li>checkUser 验证用户登录
  * <li>registerUser 进行用户的注册
- * <li>onlineFriendList 取在线用户列表
+ * <li>getOnlineFriendList 获取在线用户列表
  * <li>logout 退出
  * <li>startChatThread 启动聊天窗口的线程
  * <li>startListThread 启动在线用户列表的线程
@@ -92,11 +93,12 @@ public class UserClientService {
                 JOptionPane.showMessageDialog(null, "注册成功");
                 status = true;
             } else {
+                System.out.println("Message: " + message.getMessType());
                 JOptionPane.showMessageDialog(null, "注册失败");
                 socket.close();
             }
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            System.err.println("UserClientService: registerUser: " + e.getMessage());
         }
         return status;
     }
@@ -107,7 +109,8 @@ public class UserClientService {
      */
     public void getOnlineFriendList(String senderId) {
         Message message = new Message();
-        message.setSendTime(new Date().toString());
+        SimpleDateFormat sdf = new SimpleDateFormat("MM月dd日HH时mm分ss秒");
+        message.setSendTime(sdf.format(new Date()));
         message.setSender(senderId);
         message.setMessType(MessageType.GET_ONLINE_FRIEND);
 

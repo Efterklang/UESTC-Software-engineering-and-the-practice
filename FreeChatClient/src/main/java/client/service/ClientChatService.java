@@ -10,7 +10,7 @@ import client.utils.MyObjectOutputStream;
 
 /**
  * @author gjx
- * @apiNote 客户端聊天服务，实现用户私聊，群聊功能
+ * @apiNote 客户端聊天服务层，实现用户私聊，群聊功能
  * <ul>
  * <li>sendDirectMessage 私聊方法
  * <li>sendGroupMessage 群聊方法
@@ -21,16 +21,6 @@ public class ClientChatService {
     SimpleDateFormat sdf = new SimpleDateFormat("MM月dd日HH时mm分ss秒");
     public ClientChatService(ChatFrame chatFrame) {
         this.chatFrame = chatFrame;
-    }
-
-    /**
-     * @apiNote 将消息打印到聊天框
-     * @param content 消息内容
-     */
-    public void printToChatFrame(String content) {
-        if (content != null) {
-            chatFrame.getChatTxt().setText(chatFrame.getChatTxt().getText() + content + "\n");
-        }
     }
 
     /**
@@ -46,7 +36,7 @@ public class ClientChatService {
         message.setSender(senderId);
         message.setGetter(getterId);
         message.setContent(content);
-        message.setSendTime(new java.util.Date().toString());
+        message.setSendTime(sdf.format(new Date()));
         // 打印消息到聊天框
         printToChatFrame(senderId + "(我)" + sdf.format(new Date()));
         printToChatFrame(content + "\n");
@@ -69,8 +59,8 @@ public class ClientChatService {
         message.setMessType(MessageType.GROUP_MES);
         message.setSender(sendId);
         message.setContent(content);
-        message.setSendTime(new java.util.Date().toString());
-        
+        message.setSendTime(sdf.format(new Date()));
+
         printToChatFrame(sendId + "(我)" + sdf.format(new Date()));
         printToChatFrame(content + "\n");
 
@@ -80,6 +70,16 @@ public class ClientChatService {
             oos.writeObject(message);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * @apiNote 将消息打印到聊天框
+     * @param content 消息内容
+     */
+    public void printToChatFrame(String content) {
+        if (content != null) {
+            chatFrame.getChatTxt().setText(chatFrame.getChatTxt().getText() + content + "\n");
         }
     }
 }

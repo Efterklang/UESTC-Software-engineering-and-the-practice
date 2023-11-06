@@ -2,6 +2,7 @@ package client.service;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.Socket;
 
 import javax.swing.JOptionPane;
@@ -46,12 +47,14 @@ public class ClientConnectServerThread extends Thread {
     @Override
     public void run() {
         while (true) {
-            try (MyObjectInputStream ois = new MyObjectInputStream(socket.getInputStream());) {
+            try {
+                MyObjectInputStream ois = new MyObjectInputStream(socket.getInputStream());
                 Message message = (Message) ois.readObject();
+
                 switch (message.getMessType()) {
                     // 返回在线用户列表(message.getContent())
                     case MessageType.RETURN_ONLINE_FRIEND ->
-                            printToListFrame(message.getSendTime() + "\n======= 在线用户 ======\n"
+                            printToListFrame(message.getSendTime() + "\n========== 在线用户 =========\n"
                                     + "群聊\n" + message.getContent());
 
                     // 接收普通私聊消息和群聊消息
@@ -80,7 +83,7 @@ public class ClientConnectServerThread extends Thread {
                     default -> {
                     }
                 }
-            } catch (Exception e) {
+            } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
         }
