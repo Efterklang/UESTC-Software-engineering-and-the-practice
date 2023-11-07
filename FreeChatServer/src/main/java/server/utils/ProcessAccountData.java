@@ -62,15 +62,4 @@ public class ProcessAccountData {
             e.printStackTrace();
         }
     }
-
-    //DEBUG
-    public static void main(String[] args) {
-        ConcurrentHashMap<String, User> validUsers = new ConcurrentHashMap<>();
-        ProcessAccountData processAccountData = new ProcessAccountData();
-        processAccountData.writeAccountFile("admin", "123456");
-        processAccountData.writeAccountFile("admin2", "123");
-        processAccountData.readAccountFile(validUsers);
-        System.out.println(validUsers.get("admin").getPassword());
-        System.out.println(validUsers.get("admin2").getPassword());
-    }
 }
