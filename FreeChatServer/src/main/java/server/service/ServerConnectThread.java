@@ -44,7 +44,6 @@ public class ServerConnectThread extends Thread {
     public void run() {
         label:
         while (true) {
-            printToServerFrame(userId + " is connected.");
             try {
                 MyObjectInputStream ois = new MyObjectInputStream(socket.getInputStream());
                 // 若Client没有发送对象, 则程序在此阻塞(暂停)
@@ -168,7 +167,6 @@ public class ServerConnectThread extends Thread {
     public void printToServerFrame(String msg) {
         if (msg != null) {
             serverFrame.getShowcase().setText(serverFrame.getShowcase().getText() + msg + "\n");
-            System.out.println(msg);
         }
     }
 }

@@ -71,12 +71,12 @@ public class ClientConnectServerThread extends Thread {
                         if (filePath != null) {
                             try (FileOutputStream fos = new FileOutputStream(filePath)) {
                                 fos.write(message.getFileBytes());
+                                JOptionPane.showMessageDialog(null, "保存成功", "Success",
+                                        JOptionPane.INFORMATION_MESSAGE);
                             } catch (FileNotFoundException e) {
                                 JOptionPane.showMessageDialog(null, "保存失败，文件路径错误", "Warning",
                                         JOptionPane.INFORMATION_MESSAGE);
                             }
-                            JOptionPane.showMessageDialog(null, "保存成功", "Success",
-                                    JOptionPane.INFORMATION_MESSAGE);
                         }
                     }
                     case MessageType.CLIENT_EXIT -> socket.close();
@@ -98,7 +98,7 @@ public class ClientConnectServerThread extends Thread {
      */
     public String saveFileAddress(String userId, String sender, String fileName) {
         return JOptionPane.showInputDialog(null,
-                sender + "发送了" + fileName + "\n 请输入您想保存的路径(绝对路径):\n,",
+                sender + "发送了" + fileName + "\n 请输入您想保存的路径(绝对路径):\ne.g:E:\\UESTC\\fileName.md",
                 "文件接收",
                 JOptionPane.INFORMATION_MESSAGE);
     }
@@ -110,7 +110,6 @@ public class ClientConnectServerThread extends Thread {
     public void printToChatFrame(String content) {
         if (content != null) {
             chatFrame.getChatTxt().setText(chatFrame.getChatTxt().getText() + content + "\n");
-            System.out.println(content + "\n");
         }
     }
 

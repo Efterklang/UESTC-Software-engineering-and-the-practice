@@ -90,11 +90,8 @@ public class UserClientService {
             Message message = (Message) ois.readObject();
 
             if (message.getMessType().equals(MessageType.REGIST_SUCCEED)) {
-                JOptionPane.showMessageDialog(null, "注册成功");
                 status = true;
             } else {
-                System.out.println("Message: " + message.getMessType());
-                JOptionPane.showMessageDialog(null, "注册失败");
                 socket.close();
             }
         } catch (IOException | ClassNotFoundException e) {
@@ -141,7 +138,6 @@ public class UserClientService {
             // 发送message，请求退出
             MyObjectOutputStream oos = new MyObjectOutputStream(thread.getSocket().getOutputStream());
             oos.writeObject(message);
-            System.out.println(userId + "退出系统");
         } catch (Exception e) {
             e.printStackTrace();
         }
