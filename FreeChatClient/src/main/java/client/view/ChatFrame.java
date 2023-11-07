@@ -3,7 +3,6 @@ package client.view;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -169,8 +168,6 @@ public class ChatFrame extends JFrame {
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent e) {
-                JOptionPane.showMessageDialog(null, "确定退出吗", "关闭聊天窗口", JOptionPane.QUESTION_MESSAGE);
-                userClientService.logout(userId, getterId);
                 this.setVisible(false);
             }
 
