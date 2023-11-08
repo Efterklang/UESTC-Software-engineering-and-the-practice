@@ -144,8 +144,6 @@ public class LoginFrame extends JFrame {
 					LoginFrame.this.dispose();
 					JOptionPane.showConfirmDialog(null, "登录成功");
 					new OnlineFriendsListFrame(userId, userClientService);
-				} else {
-					JOptionPane.showMessageDialog(null, "账号或密码错误");
 				}
 			}
 		});
