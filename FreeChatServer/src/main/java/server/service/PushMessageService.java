@@ -27,8 +27,8 @@ public class PushMessageService {
     public void pushMsg(String msg) {
         // initialize message
         Message message = new Message();
-        message.setSender("\n ===== FreeChat推送 =====");
-        message.setContent(msg + "\n\n======== End ======\n");
+        message.setSender("\n========== FreeChat推送 =========\n");
+        message.setContent("\t\t\t" + msg + "\n\n======== End ======\n");
         message.setMessType(MessageType.GROUP_MES);
         message.setSendTime(sdf.format(new Date()));
         printToServerFrame("Server 推送消息:" + msg);

@@ -84,7 +84,7 @@ public class ClientConnectServerThread extends Thread {
                     }
                 }
             } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
+                System.err.println("ClientConnectServerThread: run: " + e.getMessage());
             }
         }
     }

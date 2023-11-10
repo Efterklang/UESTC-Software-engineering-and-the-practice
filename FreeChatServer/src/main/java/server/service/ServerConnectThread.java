@@ -70,9 +70,9 @@ public class ServerConnectThread extends Thread {
                             MyObjectOutputStream oos2 = new MyObjectOutputStream(thread.getSocket().getOutputStream());
                             oos2.writeObject(message);
                             printToServerFrame(
-                                    message.getGetter() + "accepted" + message.getSender() + "'s message successfully");
+                                    message.getGetter() + " accepted" + message.getSender() + "'s message successfully");
                         } else {
-                            printToServerFrame(message.getSender() + "failed to find " + message.getGetter() + "!");
+                            printToServerFrame(message.getSender() + " failed to find " + message.getGetter() + "!");
                         }
                     }
                     case MessageType.GROUP_MES -> {
@@ -89,10 +89,10 @@ public class ServerConnectThread extends Thread {
                                 MyObjectOutputStream oos = new MyObjectOutputStream(thread.getSocket().getOutputStream());
                                 oos.writeObject(message);
                                 printToServerFrame(
-                                        onlineUserId + "accepted" + message.getSender() + "'s group message successfully");
+                                        onlineUserId + " accepted" + message.getSender() + "'s group message successfully");
                             } else {
                                 printToServerFrame(
-                                        onlineUserId + "failed to accept" + message.getSender() + "'s group message!");
+                                        onlineUserId + " failed to accept" + message.getSender() + "'s group message!");
                             }
                         }
                     }
@@ -102,9 +102,9 @@ public class ServerConnectThread extends Thread {
                         if (thread != null) {
                             MyObjectOutputStream oos = new MyObjectOutputStream(thread.getSocket().getOutputStream());
                             oos.writeObject(message);
-                            printToServerFrame(userId + "sent file to" + getterId + "successfully");
+                            printToServerFrame(userId + " sent file to" + getterId + "successfully");
                         } else {
-                            printToServerFrame(userId + "failed to find" + getterId + "!");
+                            printToServerFrame(userId + " failed to find" + getterId + "!");
                         }
                     }
                     case MessageType.GROUP_FILE_MES -> {
@@ -121,11 +121,11 @@ public class ServerConnectThread extends Thread {
                                             thread.getSocket().getOutputStream());
                                     oos.writeObject(message);
                                     printToServerFrame(
-                                            onlineUserId + "accepted" + message.getSender()
+                                            onlineUserId + " accepted" + message.getSender()
                                                     + "'s group file-msg successfully");
                                 } else {
                                     printToServerFrame(
-                                            onlineUserId + "failed to accept" + message.getSender() + "'s group file-msg!");
+                                            onlineUserId + " failed to accept" + message.getSender() + "'s group file-msg!");
                                 }
                             }
                         }
