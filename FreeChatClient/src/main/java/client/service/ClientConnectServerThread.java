@@ -53,17 +53,21 @@ public class ClientConnectServerThread extends Thread {
 
                 switch (message.getMessType()) {
                     // 返回在线用户列表(message.getContent())
-                    case MessageType.RETURN_ONLINE_FRIEND ->
-                            printToListFrame(message.getSendTime() + "\n========== 在线用户 =========\n"
-                                    + "群聊\n" + message.getContent());
+                    case MessageType.RETURN_ONLINE_FRIEND:
+                        printToListFrame(message.getSendTime() + "\n========== 在线用户 =========\n"
+                                + "群聊\n" + message.getContent());
+                        break;
 
                     // 接收普通私聊消息和群聊消息
-                    case MessageType.COMMON_MES, MessageType.GROUP_MES -> {
+                    case MessageType.COMMON_MES:
+                    case MessageType.GROUP_MES:
                         printToChatFrame(message.getSender() + "\t\t\t" + message.getSendTime());
                         printToChatFrame(message.getContent() + "\n");
-                    }
+                        break;
+
                     // 接收文件消息
-                    case MessageType.DIRECT_FILE_MES, MessageType.GROUP_FILE_MES -> {
+                    case MessageType.DIRECT_FILE_MES:
+                    case MessageType.GROUP_FILE_MES:
                         printToChatFrame(message.getSender() + "\t\t\t" + message.getSendTime());
                         printToChatFrame(message.getFileName() + "\n");
                         String filePath = saveFileAddress(message.getGetter(), message.getSender(),
@@ -76,14 +80,22 @@ public class ClientConnectServerThread extends Thread {
                             } catch (FileNotFoundException e) {
                                 JOptionPane.showMessageDialog(null, "保存失败，文件路径错误", "Warning",
                                         JOptionPane.INFORMATION_MESSAGE);
+                            } catch (IOException e) {
+                                System.err.println("ClientConnectServerThread: run: " + e.getMessage());
                             }
                         }
-                    }
-                    case MessageType.CLIENT_EXIT -> socket.close();
-                    default -> {
-                    }
+                        break;
+
+                    case MessageType.CLIENT_EXIT:
+                        socket.close();
+                        break;
+
+                    default:
+                        break;
                 }
-            } catch (IOException | ClassNotFoundException e) {
+            } catch (IOException e) {
+                System.err.println("ClientConnectServerThread: run: " + e.getMessage());
+            } catch (ClassNotFoundException e) {
                 System.err.println("ClientConnectServerThread: run: " + e.getMessage());
             }
         }

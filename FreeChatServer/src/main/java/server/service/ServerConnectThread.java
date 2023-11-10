@@ -50,7 +50,7 @@ public class ServerConnectThread extends Thread {
                 Message message = (Message) ois.readObject();
                 String type = message.getMessType();
                 switch (type) {
-                    case MessageType.GET_ONLINE_FRIEND -> {
+                    case MessageType.GET_ONLINE_FRIEND:
                         String onlineUsers = ServerConnectThreadManage.getOnlineUsers();
                         Message responseToClient = new Message();
                         responseToClient.setMessType(MessageType.RETURN_ONLINE_FRIEND);
@@ -61,21 +61,21 @@ public class ServerConnectThread extends Thread {
                         printToServerFrame("Send online users List to " + userId + "...");
                         MyObjectOutputStream oos = new MyObjectOutputStream(socket.getOutputStream());
                         oos.writeObject(responseToClient);
-                    }
-                    case MessageType.COMMON_MES -> {
-                        ServerConnectThread thread = ServerConnectThreadManage.getThread(message.getGetter(),
+                        break;
+                    case MessageType.COMMON_MES:
+                        ServerConnectThread thread0 = ServerConnectThreadManage.getThread(message.getGetter(),
                                 message.getSender());
 
-                        if (thread != null) { // 线程存在
-                            MyObjectOutputStream oos2 = new MyObjectOutputStream(thread.getSocket().getOutputStream());
+                        if (thread0 != null) { // 线程存在
+                            MyObjectOutputStream oos2 = new MyObjectOutputStream(thread0.getSocket().getOutputStream());
                             oos2.writeObject(message);
                             printToServerFrame(
                                     message.getGetter() + " accepted" + message.getSender() + "'s message successfully");
                         } else {
                             printToServerFrame(message.getSender() + " failed to find " + message.getGetter() + "!");
                         }
-                    }
-                    case MessageType.GROUP_MES -> {
+                        break;
+                    case MessageType.GROUP_MES:
                         HashMap<String, HashMap<String, ServerConnectThread>> map = ServerConnectThreadManage.getMap();
                         Iterator<String> iterator = map.keySet().iterator();
                         String onlineUserId;
@@ -83,11 +83,11 @@ public class ServerConnectThread extends Thread {
                         while (iterator.hasNext()) {
                             onlineUserId = iterator.next();
                             message.setGetter(onlineUserId);
-                            ServerConnectThread thread = map.get(onlineUserId).get("群聊");
+                            ServerConnectThread thread1 = map.get(onlineUserId).get("群聊");
                             // 将信息发送给除了自己的其他在线用户
                             if (!onlineUserId.equals(message.getSender())) {
-                                MyObjectOutputStream oos = new MyObjectOutputStream(thread.getSocket().getOutputStream());
-                                oos.writeObject(message);
+                                MyObjectOutputStream oos3 = new MyObjectOutputStream(thread1.getSocket().getOutputStream());
+                                oos3.writeObject(message);
                                 printToServerFrame(
                                         onlineUserId + " accepted" + message.getSender() + "'s group message successfully");
                             } else {
@@ -95,50 +95,50 @@ public class ServerConnectThread extends Thread {
                                         onlineUserId + " failed to accept" + message.getSender() + "'s group message!");
                             }
                         }
-                    }
-                    case MessageType.DIRECT_FILE_MES -> {
+                        break;
+                    case MessageType.DIRECT_FILE_MES:
                         String getterId = message.getGetter();
-                        ServerConnectThread thread = ServerConnectThreadManage.getThread(getterId, userId);
-                        if (thread != null) {
-                            MyObjectOutputStream oos = new MyObjectOutputStream(thread.getSocket().getOutputStream());
-                            oos.writeObject(message);
+                        ServerConnectThread thread2 = ServerConnectThreadManage.getThread(getterId, userId);
+                        if (thread2 != null) {
+                            MyObjectOutputStream oos4 = new MyObjectOutputStream(thread2.getSocket().getOutputStream());
+                            oos4.writeObject(message);
                             printToServerFrame(userId + " sent file to" + getterId + "successfully");
                         } else {
                             printToServerFrame(userId + " failed to find" + getterId + "!");
                         }
-                    }
-                    case MessageType.GROUP_FILE_MES -> {
-                        HashMap<String, HashMap<String, ServerConnectThread>> map = ServerConnectThreadManage.getMap();
-                        Iterator<String> iterator = map.keySet().iterator();
-                        String onlineUserId;
-                        while (iterator.hasNext()) {
-                            onlineUserId = iterator.next().toString();
-                            if (!onlineUserId.equals(message.getSender())) {
-                                message.setGetter(onlineUserId);
-                                ServerConnectThread thread = map.get(onlineUserId).get("群聊");
-                                if (thread != null) {
-                                    MyObjectOutputStream oos = new MyObjectOutputStream(
-                                            thread.getSocket().getOutputStream());
-                                    oos.writeObject(message);
+                        break;
+                    case MessageType.GROUP_FILE_MES:
+                        HashMap<String, HashMap<String, ServerConnectThread>> map2 = ServerConnectThreadManage.getMap();
+                        Iterator<String> iterator2 = map2.keySet().iterator();
+                        String onlineUserId2;
+                        while (iterator2.hasNext()) {
+                            onlineUserId2 = iterator2.next().toString();
+                            if (!onlineUserId2.equals(message.getSender())) {
+                                message.setGetter(onlineUserId2);
+                                ServerConnectThread thread3 = map2.get(onlineUserId2).get("群聊");
+                                if (thread3 != null) {
+                                    MyObjectOutputStream oos5 = new MyObjectOutputStream(
+                                            thread3.getSocket().getOutputStream());
+                                    oos5.writeObject(message);
                                     printToServerFrame(
-                                            onlineUserId + " accepted" + message.getSender()
+                                            onlineUserId2 + " accepted" + message.getSender()
                                                     + "'s group file-msg successfully");
                                 } else {
                                     printToServerFrame(
-                                            onlineUserId + " failed to accept" + message.getSender() + "'s group file-msg!");
+                                            onlineUserId2 + " failed to accept" + message.getSender() + "'s group file-msg!");
                                 }
                             }
                         }
-                    }
-                    case MessageType.CLIENT_EXIT -> {
+                        break;
+                    case MessageType.CLIENT_EXIT:
                         /*
                          * 客户端调用UserClientService的logout()方法 向服务端发送退出请求
                          * 服务端接受到退出请求，将msg返回给客户端线程，再关闭对应的socket
                          */
-                        ServerConnectThread thread = ServerConnectThreadManage.getThread(message.getSender(),
+                        ServerConnectThread thread4 = ServerConnectThreadManage.getThread(message.getSender(),
                                 message.getGetter());
-                        MyObjectOutputStream oos = new MyObjectOutputStream(thread.getSocket().getOutputStream());
-                        oos.writeObject(message);
+                        MyObjectOutputStream oos6 = new MyObjectOutputStream(thread4.getSocket().getOutputStream());
+                        oos6.writeObject(message);
                         if (message.getGetter().equals("在线")) {
                             ServerConnectThreadManage.removeThread(userId);
                             printToServerFrame(userId + " exited successfully.");
@@ -151,8 +151,9 @@ public class ServerConnectThread extends Thread {
                         }
                         socket.close();
                         break label;
-                    }
-                    default -> printToServerFrame("[ERROR] Unknown message type.");
+                    default:
+                        printToServerFrame("[ERROR] Unknown message type.");
+                        break;
                 }
             } catch (IOException | ClassNotFoundException e) {
                 System.out.println("ServerConnectThread.java: " + e.getMessage());
