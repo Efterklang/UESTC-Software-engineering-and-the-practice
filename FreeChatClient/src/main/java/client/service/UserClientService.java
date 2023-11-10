@@ -33,6 +33,29 @@ public class UserClientService {
     private User user = new User();
     private Socket socket;
 
+    private static InetAddress address;
+    private static Integer port;
+
+    
+    static {
+        boolean isInputInvalid = true;
+        while (isInputInvalid) {
+            String addressStr = JOptionPane.showInputDialog("请输入服务器IP地址");
+            try {
+                address = InetAddress.getByName(addressStr);
+            } catch (UnknownHostException e) {
+                JOptionPane.showMessageDialog(null, "Invalid IP Address");
+            }
+            String portStr = JOptionPane.showInputDialog("请输入服务器端口号：");
+            try {
+                port = Integer.parseInt(portStr);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "无效的端口号");
+            }
+            isInputInvalid = false;
+        }
+    }
+
     /**
      * @param userId 用户名
      * @param password 密码
@@ -47,7 +70,7 @@ public class UserClientService {
             user.setUserId(userId);
             user.setPassword(password);
             // 创建Socket,与服务器建立连接
-            socket = new Socket(InetAddress.getLocalHost(), 9999);
+            socket = new Socket(address, port);
             // 发送User到服务端
             MyObjectOutputStream oos = new MyObjectOutputStream(socket.getOutputStream());
             oos.writeObject(user);
@@ -82,7 +105,7 @@ public class UserClientService {
             user.setPassword(password);
             user.setRegistMessageType(MessageType.REGIST_REQUEST);
 
-            socket = new Socket(InetAddress.getLocalHost(), 9999);
+            socket = new Socket(address, port);
             MyObjectOutputStream oos = new MyObjectOutputStream(socket.getOutputStream());
             oos.writeObject(user);
 
@@ -153,7 +176,7 @@ public class UserClientService {
         user.setUserId(userId);
         user.setState(state);
         try {
-            socket = new Socket(InetAddress.getLocalHost(), 9999);
+            socket = new Socket(address, port);
             MyObjectOutputStream oos = new MyObjectOutputStream(socket.getOutputStream());
             oos.writeObject(user);
         } catch (Exception e) {

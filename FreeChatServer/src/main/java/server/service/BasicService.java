@@ -1,6 +1,7 @@
 package server.service;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ConcurrentHashMap;
@@ -17,7 +18,6 @@ import server.utils.ProcessAccountData;
  * @apiNote 服务器基本服务类，
  * @author gjx
  */
-@SuppressWarnings("all")
 public class BasicService {
     private ServerSocket serverSocket = null;
     private ServerFrame serverFrame = null;
@@ -29,11 +29,13 @@ public class BasicService {
         processAccountData.readAccountFile(validUsers);
     }
 
-    public BasicService(ServerFrame serverFrame) {
+    public BasicService(ServerFrame serverFrame,Integer port) {
         this.serverFrame = serverFrame;
+        
         try {
-            serverSocket = new ServerSocket(9999);
-            printToServerFrame("服务器启动成功, Port9999监听中...");
+            serverSocket = new ServerSocket(port);
+            InetAddress address = InetAddress.getLocalHost();
+            printToServerFrame("服务器启动成功\nIp:" + address + "\nPort" + port + "监听中...");
             while (true) {
                 // Listen for socket and receive User
                 Socket socket = serverSocket.accept();
@@ -61,7 +63,7 @@ public class BasicService {
                 } else if (user.getState() != null) {
                     ServerConnectThread thread = new ServerConnectThread(serverFrame, socket, user.getUserId());
                     thread.start();
-                    new ServerConnectThreadManage().addThread(user.getUserId(), user.getState(), thread);
+                    ServerConnectThreadManage.addThread(user.getUserId(), user.getState(), thread);
                     if (user.getState() == "群聊") {
                         printToServerFrame("用户" + user.getUserId() + "创建群聊窗口");
                     } else {
@@ -73,7 +75,7 @@ public class BasicService {
                         responseToClient.setMessType(MessageType.LOGIN_SUCCEED);
                         ServerConnectThread thread = new ServerConnectThread(serverFrame, socket, user.getUserId());
                         thread.start();
-                        new ServerConnectThreadManage().addThread(user.getUserId(), "在线", thread);
+                        ServerConnectThreadManage.addThread(user.getUserId(), "在线", thread);
                         oos.writeObject(responseToClient);
                     } else {
                         printToServerFrame("用户" + user.getUserId() + "登录失败");

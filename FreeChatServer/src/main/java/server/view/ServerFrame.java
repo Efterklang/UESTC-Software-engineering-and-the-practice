@@ -46,7 +46,7 @@ public class ServerFrame extends JFrame {
     }
 
     public ServerFrame() {
-        super("FreChat Server");
+        super("FreeChat Server");
         // northPanel: pushTxt
         JPanel northPanel = new JPanel();
         northPanel.add(new JLabel("Push Message: "));
@@ -91,10 +91,11 @@ public class ServerFrame extends JFrame {
              * 启动服务端可能需要一些时间，此处使用单独的线程来启动服务端，防止阻塞。
              */
             public void actionPerformed(java.awt.event.ActionEvent e) {
+                String port = JOptionPane.showInputDialog("请输入开放的端口号：");
                 new Thread() {
                     @Override
                     public void run() {
-                        server = new BasicService(ServerFrame.this);
+                        server = new BasicService(ServerFrame.this, Integer.parseInt(port));
                     }
                 }.start();
             }
