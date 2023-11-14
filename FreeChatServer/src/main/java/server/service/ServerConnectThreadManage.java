@@ -8,9 +8,9 @@ import java.util.Iterator;
  * @version 1.
  * @apiNote 服务器管理用户线程类
  *          <ul>
- *          <li>HashMap<String, HashMap<String, ServerConnetThread>>
+ *          <li>HashMap<String, HashMap<String, ServerConnectThread>>
  *          <li>用户id-HashMap<状态(对方id)-线程>
- *          <li>addThread(String userId, String state, ServerConnetThread
+ *          <li>addThread(String userId, String state, ServerConnectThread
  *          thread)
  *          <li>新建一个线程，加入到map中
  *          <li>getThread(String userId, String state) 根据id返回线程

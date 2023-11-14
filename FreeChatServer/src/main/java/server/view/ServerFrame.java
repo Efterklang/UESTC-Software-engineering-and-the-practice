@@ -78,11 +78,11 @@ public class ServerFrame extends JFrame {
         this.add(southPanel, BorderLayout.SOUTH);
 
         // 设置窗口属性
-        Dimension srceenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
         this.setSize(500, 400);
-        this.setLocation((int) srceenSize.getWidth() / 2 - 250, (int) srceenSize.getHeight() / 2 - 200);
+        this.setLocation((int) screenSize.getWidth() / 2 - 250, (int) screenSize.getHeight() / 2 - 200);
 
         // 点击 "启动服务端" 按钮, 启动Server
         startButton.addActionListener(new ActionListener() {

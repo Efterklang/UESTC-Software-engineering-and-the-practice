@@ -48,7 +48,7 @@ public class PushMessageService {
                     JOptionPane.showMessageDialog(null, "推送给" + onlineUserId + "失败");
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("PushMessageService.java: " + e.getMessage());
             }
         }
         serverFrame.getPushTxt().setText("");

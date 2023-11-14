@@ -22,7 +22,7 @@ public class BasicService {
     private ServerSocket serverSocket = null;
     private ServerFrame serverFrame = null;
     private static ConcurrentHashMap<String, User> validUsers = new ConcurrentHashMap<>();
-    private ProcessAccountData processAccountData = new ProcessAccountData();
+    private final ProcessAccountData processAccountData = new ProcessAccountData();
 
     {
         validUsers.put("default", new User("default", "123456"));
@@ -49,7 +49,7 @@ public class BasicService {
 
                 if (user.getRegistMessageType() != null
                         && user.getRegistMessageType().equals(MessageType.REGIST_REQUEST)) {
-                    if (registUser(user.getUserId(), user)) {
+                    if (isRegisterSucceed(user.getUserId(), user)) {
                         printToServerFrame("用户" + user.getUserId() + "注册成功");
                         responseToClient.setMessType(MessageType.REGIST_SUCCEED);
                         oos.writeObject(responseToClient);
@@ -70,7 +70,7 @@ public class BasicService {
                         printToServerFrame("用户" + user.getUserId() + "创建与" + user.getState() + "的私聊窗口");
                     }
                 } else {
-                    if (checkUser(user.getUserId(), user.getPassword())) {
+                    if (isUserValid(user.getUserId(), user.getPassword())) {
                         printToServerFrame("用户" + user.getUserId() + "登录成功");
                         responseToClient.setMessType(MessageType.LOGIN_SUCCEED);
                         ServerConnectThread thread = new ServerConnectThread(serverFrame, socket, user.getUserId());
@@ -86,13 +86,13 @@ public class BasicService {
                 }
             }
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("BasicService.java: " + e.getMessage());
         } finally {
             
         }
     }
 
-    private boolean checkUser(String userId, String pwd) {
+    private boolean isUserValid(String userId, String pwd) {
         if (validUsers.get(userId) == null) {
             return false;
         } else {
@@ -100,7 +100,7 @@ public class BasicService {
         }
     }
 
-    private boolean registUser(String userId, User user) {
+    private boolean isRegisterSucceed(String userId, User user) {
         if (validUsers.get(userId) == null) {
             processAccountData.writeAccountFile(userId, user.getPassword()); // 同步账号到数据库
             validUsers.put(userId, user);

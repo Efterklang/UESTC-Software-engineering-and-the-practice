@@ -112,7 +112,7 @@ public class ServerConnectThread extends Thread {
                         Iterator<String> iterator = map.keySet().iterator();
                         String onlineUserId;
                         while (iterator.hasNext()) {
-                            onlineUserId = iterator.next().toString();
+                            onlineUserId = iterator.next();
                             if (!onlineUserId.equals(message.getSender())) {
                                 message.setGetter(onlineUserId);
                                 ServerConnectThread thread = map.get(onlineUserId).get("群聊");
