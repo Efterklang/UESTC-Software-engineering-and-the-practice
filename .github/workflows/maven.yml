@@ -31,7 +31,7 @@ jobs:
     - name: Build FreeChatClient with Maven
       run: mvn -B package --file FreeChatClient/pom.xml
     - name: Build FreeCharServer with Maven
-      run: mvb -B package --file FreeChatServer/pom.xml
+      run: mvn -B package --file FreeChatServer/pom.xml
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
