@@ -43,3 +43,16 @@ jobs:
         cd FreeChatServer
         ls -R
         cd ..
+    
+    - name: Upload FreeChatClient JAR File
+      uses: actions/upload-artifact@v2
+      with:
+        name: FreeChatClient
+        path: FreeChatClient/target/FreeChatClient.jar
+    - name: Upload FreeChatServer JAR File
+      uses: actions/upload-artifact@v2
+      with:
+        name: FreeChatServer
+        path: FreeChatServer/target/FreeChatServer.jar
+
+        
