@@ -115,7 +115,7 @@ public class ServerFrame extends JFrame {
         // 点击 "关闭" 按钮, 跳出确认窗口
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                int option = JOptionPane.showConfirmDialog(null, "确认退出码", "Confirm", JOptionPane.YES_NO_OPTION);
+                int option = JOptionPane.showConfirmDialog(null, "确认退出吗", "Confirm", JOptionPane.YES_NO_OPTION);
                 if (option == JOptionPane.YES_OPTION) {
                     System.exit(0);
                 } else {

@@ -70,7 +70,7 @@ public class BasicService {
                         printToServerFrame("用户" + user.getUserId() + "创建与" + user.getState() + "的私聊窗口");
                     }
                 } else {
-                    if (isUserValid(user.getUserId(), user.getPassword())) {
+                    if (isLoginSucceed(user.getUserId(), user.getPassword())) {
                         printToServerFrame("用户" + user.getUserId() + "登录成功");
                         responseToClient.setMessType(MessageType.LOGIN_SUCCEED);
                         ServerConnectThread thread = new ServerConnectThread(serverFrame, socket, user.getUserId());
@@ -92,7 +92,7 @@ public class BasicService {
         }
     }
 
-    private boolean isUserValid(String userId, String pwd) {
+    private boolean isLoginSucceed(String userId, String pwd) {
         if (validUsers.get(userId) == null) {
             return false;
         } else {

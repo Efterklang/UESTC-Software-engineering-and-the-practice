@@ -67,11 +67,12 @@ public class ServerConnectThread extends Thread {
                                 message.getSender());
 
                         if (thread != null) { // 线程存在
-                            MyObjectOutputStream oos2 = new MyObjectOutputStream(thread.getSocket().getOutputStream());
-                            oos2.writeObject(message);
+                            MyObjectOutputStream oos = new MyObjectOutputStream(thread.getSocket().getOutputStream());
+                            oos.writeObject(message);
                             printToServerFrame(
                                     message.getGetter() + " accepted" + message.getSender() + "'s message successfully");
                         } else {
+
                             printToServerFrame(message.getSender() + " failed to find " + message.getGetter() + "!");
                         }
                     }
