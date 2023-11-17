@@ -1,6 +1,6 @@
 ## FreeChat项目
 
-### `<font color = "426ab3">`Intro `</font>`
+### <font color = "426ab3">Intro </font>
 
 > **FreeChat Project**
 
@@ -25,7 +25,9 @@
 * **多线程：使用ConcurrentHashMap管理用户的线程集合，Thread集合负责维护Socket**
 * **GUI：实现图形化交互界面，使用java awt＆swing**
 * **git＆maven: 项目管理**
-* **MySql+JDBC记录用户信息；或者使用I/O(写入account.properties)+HashMap模拟数据库(根据学习情况决定)**
+* **GitHub Actions: 使用github workflows实现CI(持续继承)**
+* **MySql+JDBC记录用户信息；或者使用I/O(写入到account.properties文件中)+HashMap模拟数据库(根据学习情况决定)**
+* **Launch4j：将jar包生成为.exe文件**
 
 ### 代码规范-Annotation
 
@@ -53,4 +55,3 @@
    */
   public void sendDirectFile(String senderId, String getterId, String filePath, String fileName,ChatFrame chatFrame)
   ```
-
