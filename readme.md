@@ -26,7 +26,7 @@
 * **GUI：实现图形化交互界面，使用java awt＆swing**
 * **git＆maven: 项目管理**
 * **GitHub Actions: 使用github workflows实现CI(持续继承)**
-* **MySql+JDBC记录用户信息；或者使用I/O(写入到account.properties文件中)+HashMap模拟数据库(根据学习情况决定)**
+* **使用I/O(写入到account.properties文件中)+HashMap模拟数据库**
 * **Launch4j：将jar包生成为.exe文件**
 
 ### 代码规范-Annotation
