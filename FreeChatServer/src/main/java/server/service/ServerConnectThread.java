@@ -57,7 +57,6 @@ public class ServerConnectThread extends Thread {
                         responseToClient.setContent(onlineUsers);
                         responseToClient.setSendTime(message.getSendTime());
                         responseToClient.setSender(message.getSender());
-
                         printToServerFrame("Send online users List to " + userId + "...");
                         MyObjectOutputStream oos = new MyObjectOutputStream(socket.getOutputStream());
                         oos.writeObject(responseToClient);

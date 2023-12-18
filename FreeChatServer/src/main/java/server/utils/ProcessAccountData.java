@@ -12,12 +12,14 @@ import common.User;
 
 /**
  * @apiNote 🛠️使用IO流+ConcurrentHashMap模拟数据库，后期可用JDBC+MySQL代替;
- * <ul>
- * <li> readAccountFile: 读取数据库(account.properties)中的账号数据，写入到validUsers中;
- *      当程序启动时，需要调用该方法(放在static {}中)，将数据库中的数据读取到validUsers中;
- *      当对数据库进行修改时，需要调用该方法，将修改后的数据写入到validUsers中;
- * <li> writeAccountFile: 当进行注册时，将userId＆pwd写入到数据库中(account.properties)
- * </ul>
+ *          <ul>
+ *          <li>readAccountFile: 读取数据库(account.properties)中的账号数据，写入到validUsers中;
+ *          当程序启动时，需要调用该方法(放在static {}中)，将数据库中的数据读取到validUsers中;
+ *          当对数据库进行修改时，需要调用该方法，将修改后的数据写入到validUsers中;
+ *          <li>writeAccountFile: 当进行注册时，将userId＆pwd写入到数据库中(account.properties)
+ *          </ul>
+ *          <span>由于.jar和.exe为readOnly，当ServerApp异常退出后，对account.properties不会保存;
+ *          为解决该问题，你可以修改<code>path</code>属性，将其设置为服务器本地存放数据文件的路径</span>
  * @author gjx
  * @see common.User
  */

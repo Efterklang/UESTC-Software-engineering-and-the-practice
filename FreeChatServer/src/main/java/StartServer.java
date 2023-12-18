@@ -1,5 +1,3 @@
-package server;
-
 import server.view.ServerFrame;
 
 public class StartServer {
