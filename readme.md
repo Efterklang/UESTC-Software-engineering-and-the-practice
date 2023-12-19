@@ -1,4 +1,4 @@
-## FreeChat项目
+## [FreeChat ](https://github.com/Efterklang/FreeChat)
 
 ### <font color = "426ab3">Intro </font>
 
