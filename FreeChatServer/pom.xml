@@ -41,6 +41,13 @@
     </build>
 
     <dependencies>
+
+      <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>8.0.33</version>
+      </dependency>
+
     
         <dependency>
             <groupId>org.testifyproject.junit5</groupId>
@@ -49,5 +56,11 @@
             <type>pom</type>
         </dependency>
 
+    
+      <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>8.0.17</version>
+      </dependency>
     </dependencies>
 </project>
