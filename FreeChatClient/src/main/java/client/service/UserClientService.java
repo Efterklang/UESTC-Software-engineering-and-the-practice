@@ -38,6 +38,10 @@ public class UserClientService {
 
     
     static {
+        establishConnection();
+    }
+
+    public static void establishConnection() {
         boolean isInputInvalid = true;
         while (isInputInvalid) {
             String addressStr = JOptionPane.showInputDialog("请输入服务器IP地址");
@@ -45,12 +49,14 @@ public class UserClientService {
                 address = InetAddress.getByName(addressStr);
             } catch (UnknownHostException e) {
                 JOptionPane.showMessageDialog(null, "Invalid IP Address");
+                isInputInvalid = true;
             }
             String portStr = JOptionPane.showInputDialog("请输入服务器端口号：");
             try {
                 port = Integer.parseInt(portStr);
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "无效的端口号");
+                isInputInvalid = true;
             }
             isInputInvalid = false;
         }
@@ -85,6 +91,8 @@ public class UserClientService {
             }
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "服务器未启动");
+            establishConnection();
+            checkUser(userId, password);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }

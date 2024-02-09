@@ -25,7 +25,6 @@ public class BasicService {
     private final ProcessAccountData processAccountData = new ProcessAccountData();
 
     {
-        validUsers.put("default", new User("default", "123456"));
         processAccountData.readAccountFile(validUsers);
     }
 
