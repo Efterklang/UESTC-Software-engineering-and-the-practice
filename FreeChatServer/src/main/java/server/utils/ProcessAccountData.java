@@ -31,7 +31,7 @@ public class ProcessAccountData {
     final String password = "gjxMySQLPWD";
 
     /**
-     * @apiNote 对数据库(account.properties,见target/resource)进行读取，写入到validUsers
+     * @apiNote 对数据库,进行读取，写入到validUsers
      * @param validUsers 要写入账号数据的HashMap
      * @throws IOException
      */
@@ -57,7 +57,7 @@ public class ProcessAccountData {
 
 
     /**
-     * @apiNote 当进行注册时，将userId＆pwd写入到数据库中(account.properties)
+     * @apiNote 当进行注册时，将userId＆pwd写入到数据库中
      * @param userId 用户id
      * @param pwd 用户密码
      * @throws IOException
@@ -73,4 +73,5 @@ public class ProcessAccountData {
             e.printStackTrace();
         }
     }
+    
 }
