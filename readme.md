@@ -55,3 +55,8 @@
    */
   public void sendDirectFile(String senderId, String getterId, String filePath, String fileName,ChatFrame chatFrame)
   ```
+
+### 📚技术文档
+
+* **[Masscan SCTP协议扫描实现详解](./doc/masscan-sctp-implementation.md)** - 详细说明masscan中SCTP协议扫描配置的实现位置和消息构造
+* **[Masscan SCTP快速参考](./doc/masscan-sctp-quick-reference.md)** - SCTP扫描的快速入门和参考指南
